@@ -1,0 +1,12 @@
+{
+    "name": "itsmurumba/laravel-hostpinnacle",
+    "description": "Laravel Package for Hostpinnacle SMS API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ItsMurumba",
+            "email": "kevmurumba@gmail.com"
+        }
+    ],
+    "require": {}
+}
