@@ -4,6 +4,7 @@ namespace Itsmurumba\Hostpinnacle;
 
 use Illuminate\Support\ServiceProvider;
 use Itsmurumba\Hostpinnacle\Hostpinnacle;
+use Itsmurumba\Hostpinnacle\Console\InstallHostpinnaclePackage;
 
 class HostpinnacleServiceProvider extends ServiceProvider
 {
@@ -14,9 +15,15 @@ class HostpinnacleServiceProvider extends ServiceProvider
     {
         $config = realpath(__DIR__ . '/../resources/config/hostpinnacle.php');
 
-        $this->publishes([
-            $config => config_path('hostpinnacle.php')
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                $config => config_path('hostpinnacle.php')
+            ], 'hostpinnacle-config');
+
+            $this->commands([
+                InstallHostpinnaclePackage::class,
+            ]);
+        }
     }
 
     /**
