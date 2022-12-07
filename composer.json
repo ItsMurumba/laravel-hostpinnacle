@@ -2,11 +2,47 @@
     "name": "itsmurumba/laravel-hostpinnacle",
     "description": "Laravel Package for Hostpinnacle SMS API",
     "license": "MIT",
+    "keywords": [
+        "hostpinnacle",
+        "laravel",
+        "itsmurumba"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Itsmurumba\\Hostpinnacle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Itsmurumba\\Hostpinnacle\\Tests\\": "tests"
+        }
+    },
     "authors": [
         {
             "name": "ItsMurumba",
             "email": "kevmurumba@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.1|^8.0",
+        "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0",
+        "guzzlehttp/guzzle": "^7.0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^4.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Itsmurumba\\Hostpinnacle\\HostpinnacleServiceProvider"
+            ],
+            "aliases": {
+                "Hostpinnacle": "Itsmurumba\\Hostpinnacle\\Facades\\Hostpinnacle"
+            }
+        }
+    }
 }
