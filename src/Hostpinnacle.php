@@ -195,7 +195,7 @@ class Hostpinnacle
             'apikey' => $this->apiKey,
             'content-type'  => 'application/x-www-form-urlencoded',
             'cache-control' => 'no-cache'
-        ])->get(
+        ])->post(
             $this->baseUrl . '/send',
             $payload
         );
