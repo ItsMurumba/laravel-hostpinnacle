@@ -151,7 +151,7 @@ class Hostpinnacle
      * @param [type] $groupIds
      * @return void
      */
-    private function formattedSmsData($sendMethod, $message, $messageType, $contacts = null,  $groupIds = null, $file = null)
+    private function formattedSmsData($sendMethod, $message, $messageType, $contacts = null,  $groupIds = null, $file = null, $scheduled = null)
     {
         $data = array_filter([
             "userid" => $this->username,
@@ -172,24 +172,54 @@ class Hostpinnacle
             $data["file"] = $file;
         }
 
+        if ($scheduled != null) {
+            $data["scheduleTime"] = $scheduled;
+        }
+
         return $data;
     }
 
     /**
-     * Send SMS Batch
+     * Send Quick SMS
      * Send SMS in batches. You can send single SMS or comma separated mobile numbers.
      * Country code is must for international messaging.
      *
      * @param [type] $data
      * @return void
      */
-    public function sendSmsBatch($data)
+    public function sendQuickSMS($data)
     {
         if (!isset($data['msg']) || !isset($data['mobile'])) {
             throw new IsNullException('msg and mobile must not be null');
         }
 
         $payload = $this->formattedSmsData('quick', $data['msg'], 'text', $data['mobile']);
+
+        $response = Http::asForm()->withHeaders([
+            'apikey' => $this->apiKey,
+            'cache-control' => 'no-cache'
+        ])->post(
+            $this->baseUrl . '/send',
+            $payload
+        );
+
+
+        return $response;
+    }
+
+    /**
+     * Send Quick Scheduled SMS.
+     *
+     * @param [type] $data
+     * @return void
+     */
+    public function sendQuickScheduledSMS($data)
+    {
+        if (!isset($data['msg']) || !isset($data['mobile'])) {
+            throw new IsNullException('msg and mobile must not be null');
+        }
+
+        $payload = $this->formattedSmsData('quick', $data['msg'], 'text', $data['mobile'], null, null, $data['scheduledTime']);
 
         $response = Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
