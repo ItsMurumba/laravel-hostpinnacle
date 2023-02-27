@@ -219,9 +219,8 @@ class Hostpinnacle
 
         $payload = $this->formattedSmsData('group', $data['msg'], 'text', null, $data['groupIds']);
 
-        $response = Http::withHeaders([
+        $response = Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
-            'content-type'  => 'application/x-www-form-urlencoded',
             'cache-control' => 'no-cache'
         ])->get(
             $this->baseUrl . '/send',
