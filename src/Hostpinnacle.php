@@ -191,14 +191,14 @@ class Hostpinnacle
 
         $payload = $this->formattedSmsData('quick', $data['msg'], 'text', $data['mobile']);
 
-        $response = Http::withHeaders([
+        $response = Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
-            'content-type'  => 'application/x-www-form-urlencoded',
             'cache-control' => 'no-cache'
         ])->post(
             $this->baseUrl . '/send',
             $payload
         );
+
 
         return $response;
     }
