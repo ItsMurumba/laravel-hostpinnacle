@@ -241,13 +241,40 @@ class Hostpinnacle
      * @param [type] $data
      * @return void
      */
-    public function sendSmsGroup($data)
+    public function sendGroupSMS($data)
     {
         if (!isset($data['msg']) || !isset($data['groupIds'])) {
             throw new IsNullException('msg and groupIds must not be null');
         }
 
         $payload = $this->formattedSmsData('group', $data['msg'], 'text', null, $data['groupIds']);
+
+        $response = Http::asForm()->withHeaders([
+            'apikey' => $this->apiKey,
+            'cache-control' => 'no-cache'
+        ])->get(
+            $this->baseUrl . '/send',
+            $payload
+        );
+
+        return $response;
+    }
+
+    /**
+     * Send SMS Group Scheduled
+     * Send SMS to your groups. You can send to single group or comma separated groups.
+     * Country code is must for international messaging.
+     *
+     * @param [type] $data
+     * @return void
+     */
+    public function sendGroupScheduledSMS($data)
+    {
+        if (!isset($data['msg']) || !isset($data['groupIds'])) {
+            throw new IsNullException('msg and groupIds must not be null');
+        }
+
+        $payload = $this->formattedSmsData('group', $data['msg'], 'text', null, $data['groupIds'], null, $data['scheduledTime']);
 
         $response = Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
