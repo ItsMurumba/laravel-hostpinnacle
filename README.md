@@ -1,4 +1,4 @@
-## laravel-sdk
+## laravel-hostpinnacle
 Official laravel package for Hostpinnacle SMS Service(API). It includes all public available endpoints:
 * Quick SMS
 * Group SMS
@@ -81,7 +81,7 @@ $data['msg'] = 'Hello World!';
 $response = $this->hostpinnacle->sendGroupSMS($data);
 ````
 
-a. Sending a Group Scheduled SMS
+b. Sending a Group Scheduled SMS
 ````
 $data['scheduledTime'] = '2023-02-28 17:32:03';
 $data['groupIds'] = '1056';
