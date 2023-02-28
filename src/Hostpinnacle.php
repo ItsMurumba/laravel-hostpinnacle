@@ -294,19 +294,48 @@ class Hostpinnacle
      */
     public function sendMobileOnlyFileSMS($data)
     {
-        if (!isset($data['msg']) || !isset($data['filePath'])) {
-            throw new IsNullException('msg and filePath must not be null');
+        if (!isset($data['msg']) || !isset($data['file'])) {
+            throw new IsNullException('msg and file must not be null');
         }
 
         $payload = $this->formattedSmsData('bulkupload', $data['msg'], 'text');
 
-        $extension = $data['filePath']->getClientOriginalExtension();
+        $extension = $data['file']->getClientOriginalExtension();
 
         $response = Http::withHeaders([
             'apikey' => $this->apiKey,
         ])->attach(
             'file',
-            file_get_contents($data['filePath']),
+            file_get_contents($data['file']),
+            'file.' . $extension
+        )->post(
+            $this->baseUrl . '/send',
+            $payload
+        );
+
+        return $response;
+    }
+
+    /**
+     * Send Mobile Only File Scheduled SMS
+     * Send SMS later on a scheduled data/time using File Upload. You can upload only mobile in a file with the first row being the header (Phone)
+     * Country code is must for international messaging eg 254720000000
+     */
+    public function sendMobileOnlyFileScheduledSMS($data)
+    {
+        if (!isset($data['msg']) || !isset($data['file'])) {
+            throw new IsNullException('msg and file must not be null');
+        }
+
+        $payload = $this->formattedSmsData('bulkupload', $data['msg'], 'text', null, null, null, $data['scheduledTime']);
+
+        $extension = $data['file']->getClientOriginalExtension();
+
+        $response = Http::withHeaders([
+            'apikey' => $this->apiKey,
+        ])->attach(
+            'file',
+            file_get_contents($data['file']),
             'file.' . $extension
         )->post(
             $this->baseUrl . '/send',
