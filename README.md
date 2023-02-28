@@ -44,7 +44,51 @@ HOSTPINNACLE_BASE_URL=https://smsportal.hostpinnacle.co.ke/SMSApi
 ````
 
 ## Usage
+Add the following constructor inside your controller:
+`````
+protected $hostpinnacle;
 
+public function __construct(){
+    $this->hostpinnacle = new Hostpinnacle();
+}
+`````
+**1. Quick SMS**
+
+a. Sending a quick SMS (Batch)
+````
+$data['mobile'] = '254720xxxxxx';
+$data['msg'] = 'Hello World!';
+
+$response = $this->hostpinnacle->sendQuickSMS($data);
+````
+
+b. Sending a quick scheduled SMS (Batch)
+````
+$data['scheduledTime'] = '2023-02-28 17:32:03';
+$data['mobile'] = '254720xxxxxx';
+$data['msg'] = 'Hello World!';
+
+$response = $this->hostpinnacle->sendQuickScheduledSMS($data);
+````
+
+**2. Group SMS**
+
+a. Sending a Group SMS
+````
+$data['groupIds'] = '1056';
+$data['msg'] = 'Hello World!';
+
+$response = $this->hostpinnacle->sendGroupSMS($data);
+````
+
+a. Sending a Group Scheduled SMS
+````
+$data['scheduledTime'] = '2023-02-28 17:32:03';
+$data['groupIds'] = '1056';
+$data['msg'] = 'Hello World!';
+
+$response = $this->hostpinnacle->sendGroupScheduledSMS($data);
+````
 
 # Contribution
 This is a community package and thus welcome anyone intrested to contribute in improving the package. Kindly go through the [Contribution.md](Contribution.md) before starting to contribute. Keep those PRs and Issues coming.
