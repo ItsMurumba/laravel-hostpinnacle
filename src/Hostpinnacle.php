@@ -376,16 +376,16 @@ class Hostpinnacle
 
     /**
      * Send Mobile and Message File Scheduled SMS
-     * Send SMS later on a scheduled data/time using File Upload. You can upload only mobile in a file with the first row being the header (Phone)
+     * Send SMS later on a scheduled data/time using File Upload. You can upload only mobile in a file with the first row being the header (Phone, Message)
      * Country code is must for international messaging eg 254720000000
      */
     public function sendMobileAndMessageFileScheduledSMS($data)
     {
-        if (!isset($data['msg']) || !isset($data['file'])) {
-            throw new IsNullException('msg and file must not be null');
+        if (!isset($data['file'])) {
+            throw new IsNullException('file must not be null');
         }
 
-        $payload = $this->formattedSmsData('bulkupload', $data['msg'], 'text', null, null, null, $data['scheduledTime']);
+        $payload = $this->formattedSmsData('bulkupload', null, 'text', null, null, null, $data['scheduledTime']);
 
         $extension = $data['file']->getClientOriginalExtension();
 
