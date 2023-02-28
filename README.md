@@ -89,6 +89,38 @@ $data['msg'] = 'Hello World!';
 
 $response = $this->hostpinnacle->sendGroupScheduledSMS($data);
 ````
+**3. File Upload SMS**
+
+a. Sending an SMS from File with Mobile Numbers only
+````
+$data['file'] = $request->file('file');
+$data['msg'] = 'Hello World!';
+
+$response = $this->hostpinnacle->sendMobileOnlyFileSMS($data);
+````
+
+b. Sending an SMS from File with Mobile Numbers only Scheduled
+````
+$data['scheduledTime'] = '2023-02-28 17:32:03';
+$data['file'] = $request->file('file');
+$data['msg'] = 'Hello World !';
+
+$response = $this->hostpinnacle->sendMobileOnlyFileScheduledSMS($data);
+````
+c. Sending an SMS from File with Mobile Numbers and message
+````
+$data['file'] = $request->file('file');
+
+$response = $this->hostpinnacle->sendMobileAndMessageFileSMS($data);
+````
+
+d. Sending an SMS from File with Mobile Numbers and message Scheduled
+````
+$data['scheduledTime'] = '2023-02-28 17:32:03';
+$data['file'] = $request->file('file');
+
+$response = $this->hostpinnacle->sendMobileAndMessageFileScheduledSMS($data);
+````
 
 # Contribution
 This is a community package and thus welcome anyone intrested to contribute in improving the package. Kindly go through the [Contribution.md](Contribution.md) before starting to contribute. Keep those PRs and Issues coming.
