@@ -292,7 +292,7 @@ class Hostpinnacle
      * Send SMS using File Upload. You can upload only mobile in a file or mobile and message in a file or custom message with mobile in a file.
      * Country code is must for international messaging
      */
-    public function sendSmsFile($data)
+    public function sendMobileOnlyFileSMS($data)
     {
         if (!isset($data['msg']) || !isset($data['filePath'])) {
             throw new IsNullException('msg and filePath must not be null');
