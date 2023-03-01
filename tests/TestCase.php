@@ -8,9 +8,15 @@ use Orchestra\Testbench\TestCase as TestbenchTestCase;
 
 class TestCase extends TestbenchTestCase
 {
+
+    protected $hostpinnacle;
+    protected $mock;
+
     public function setUp(): void
     {
         parent::setUp();
+        $this->hostpinnacle = Mockery::mock('Itsmurumba\Hostpinnacle\Hostpinnacle');
+        $this->mock = Mockery::mock('GuzzleHttp\Client');
     }
 
     protected function getPackageProviders($app)
