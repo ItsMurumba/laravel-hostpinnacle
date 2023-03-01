@@ -5,7 +5,7 @@ namespace Itsmurumba\Hostpinnacle\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-class InstallHostpinnacle extends Command
+class InstallHostpinnaclePackage extends Command
 {
     protected $signature = 'hostpinnacle:install';
 
