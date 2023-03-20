@@ -28,7 +28,7 @@ class InstallHostpinnaclePackageTest extends TestCase
     }
 
     /**
-     * 
+     * @test
      *
      * @return void
      */
