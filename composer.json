@@ -29,11 +29,12 @@
         "guzzlehttp/guzzle": "^6.0|^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0|^9.0|^10.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
         "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0"
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/pest"
     },
     "extra": {
         "laravel": {
@@ -43,6 +44,11 @@
             "aliases": {
                 "Hostpinnacle": "Itsmurumba\\Hostpinnacle\\Facades\\Hostpinnacle"
             }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
