@@ -13,7 +13,7 @@ class HostpinnacleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $config = realpath(__DIR__ . '/../resources/config/hostpinnacle.php');
+        $config = realpath(__DIR__ . '/../config/hostpinnacle.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
