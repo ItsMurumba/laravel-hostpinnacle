@@ -38,6 +38,7 @@
     },
     "scripts": {
         "test": "vendor/bin/pest",
+        "test:coverage": "mkdir -p build/coverage && vendor/bin/pest --coverage",
         "post-autoload-dump": [
             "@clear",
             "@prepare"

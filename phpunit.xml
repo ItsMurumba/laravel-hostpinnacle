@@ -11,8 +11,14 @@
     </testsuites>
     <source>
         <include>
-            <directory suffix=".php">./app</directory>
             <directory suffix=".php">./src</directory>
         </include>
     </source>
+    <coverage>
+        <report>
+            <html outputDirectory="build/coverage" lowUpperBound="50" highLowerBound="90"/>
+            <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="false"/>
+            <clover outputFile="build/coverage/clover.xml"/>
+        </report>
+    </coverage>
 </phpunit>
