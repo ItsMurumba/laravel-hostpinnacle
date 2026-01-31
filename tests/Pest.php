@@ -11,7 +11,9 @@
 |
 */
 
-// uses(Tests\TestCase::class)->in('Feature');
+use Itsmurumba\Hostpinnacle\Tests\TestCase;
+
+uses(TestCase::class)->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------

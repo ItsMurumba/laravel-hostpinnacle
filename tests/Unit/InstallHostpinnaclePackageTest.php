@@ -4,30 +4,34 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
 
 test('the install command copies the configuration', function () {
-    if (File::exists(config_path('hostpinnacle.php'))) {
-        unlink(config_path('hostpinnacle.php'));
+    $configPath = $this->app->configPath('hostpinnacle.php');
+
+    if (File::exists($configPath)) {
+        unlink($configPath);
     }
 
-    expect(File::exists(config_path('hostpinnacle.php')))->toBeFalse();
+    expect(File::exists($configPath))->toBeFalse();
 
     Artisan::call('hostpinnacle:install');
 
-    expect(File::exists(config_path('hostpinnacle.php')))->toBeTrue();
+    expect(File::exists($configPath))->toBeTrue();
 });
 
 test('when a config file is present users can choose not to overwrite it', function () {
-    File::put(config_path('hostpinnacle.php'), 'test contents');
-    expect(File::exists(config_path('hostpinnacle.php')))->toBeTrue();
+    $configPath = $this->app->configPath('hostpinnacle.php');
 
-    $command = $this->artisan('hostpinnacle:install');
+    File::put($configPath, 'test contents');
+    expect(File::exists($configPath))->toBeTrue();
 
-    $command->expectsConfirmation(
-        'Config file already exists. Do you want to overwrite it?',
-        'no'
-    );
+    $this->artisan('hostpinnacle:install')
+        ->expectsConfirmation(
+            'Config file already exists. Do you want to overwrite it?',
+            'no'
+        )
+        ->expectsOutput('Exiting. Hostpinnacle configuration was not overwritten')
+        ->run();
 
-    $command->expectsOutput('Exiting. Hostpinnacle configuration was not overwritten');
-    expect(file_get_contents(config_path('hostpinnacle.php')))->toBe('test contents');
+    expect(file_get_contents($configPath))->toBe('test contents');
 
-    unlink(config_path('hostpinnacle.php'));
+    unlink($configPath);
 });
