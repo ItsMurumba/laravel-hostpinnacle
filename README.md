@@ -138,10 +138,10 @@ Or directly with Pest:
 vendor/bin/pest
 ```
 
-**Code coverage** (optional) requires a coverage driver: **PCOV** or **Xdebug**. Without one, `composer test:coverage` will report “No code coverage driver is available”.
+**Code coverage** (optional) requires a coverage driver: **PCOV** or **Xdebug**. Without one, `composer test:coverage` will report "No code coverage driver is available".
 
 - **PCOV** (line coverage, fast):  
-  - **macOS (Homebrew):** `brew tap shivammathur/extensions && brew install pcov@8.4` (use your PHP version, e.g. `pcov@8.3`). Then run coverage with that PHP: `PATH="/opt/homebrew/opt/php/bin:$PATH" composer test:coverage`.  
+  - **macOS (Homebrew):** `brew tap shivammathur/extensions && brew install pcov@8.3` (use your PHP version, e.g. `pcov@8.3`). Then run coverage with that PHP: `PATH="/opt/homebrew/opt/php/bin:$PATH" composer test:coverage`.  
   - **PECL:** `pecl install pcov` then add `extension=pcov.so` to your `php.ini`.
 - **Xdebug** (full metrics): install Xdebug and enable [coverage mode](https://xdebug.org/docs/code_coverage#mode).
 
