@@ -12,7 +12,7 @@ class TestCase extends TestbenchTestCase
     protected $hostpinnacle;
     protected $mock;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->hostpinnacle = Mockery::mock('Itsmurumba\Hostpinnacle\Hostpinnacle');
@@ -30,8 +30,9 @@ class TestCase extends TestbenchTestCase
     {
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         Mockery::close();
+        parent::tearDown();
     }
 }

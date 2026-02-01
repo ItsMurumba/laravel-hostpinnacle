@@ -8,11 +8,11 @@ Welcome and thank you for considering to improve this package. Please remember t
 
 * One pull request per feature.
 
-* Includes tests
+* Includes tests (we use **Pest** and **Orchestra Testbench**—see [README#Testing](README.md#testing)).
 
 * Document all the changes and update README.md file accordingly.
 
-* All test musts be running successfully before submitting a PR.
+* All tests must be running successfully before submitting a PR (`composer test` or `vendor/bin/pest`).
 
 Let's Gooo!
 
