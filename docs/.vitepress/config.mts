@@ -7,6 +7,11 @@ export default defineConfig({
   base: '/',
   // For GitHub Pages project site (user.github.io/laravel-hostpinnacle), use:
   // base: '/laravel-hostpinnacle/',
+  vite: {
+    server: {
+      port: 5174,
+    },
+  },
   themeConfig: {
     nav: [
       { text: 'Guide', link: '/guide/installation' },
@@ -22,6 +27,7 @@ export default defineConfig({
           { text: 'Usage', link: '/guide/usage' },
           { text: 'SaaS / Multi-Account', link: '/guide/saas-multi-account' },
           { text: 'Testing', link: '/guide/testing' },
+          { text: 'Testing locally (before publish)', link: '/guide/testing-locally-before-publish' },
         ],
       },
       {
