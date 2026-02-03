@@ -24,7 +24,7 @@ class HostpinnacleAccountController extends Controller
     {
         $user = Auth::user();
         if ($user === null) {
-            return null;
+            abort(401, __('Authentication required.'));
         }
         return (int) $user->getAuthIdentifier();
     }
