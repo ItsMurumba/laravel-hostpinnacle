@@ -1,2 +1,7 @@
 /vendor/
 /build/
+
+# Docs (VitePress)
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
