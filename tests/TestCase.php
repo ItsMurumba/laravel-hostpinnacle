@@ -28,6 +28,7 @@ class TestCase extends TestbenchTestCase
 
     protected function getEnvironmentSetUp($app)
     {
+        $app['config']->set('app.key', 'base64:' . base64_encode(\Illuminate\Support\Str::random(32)));
     }
 
     protected function tearDown(): void
