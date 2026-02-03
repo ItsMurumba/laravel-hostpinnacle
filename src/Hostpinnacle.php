@@ -48,15 +48,17 @@ class Hostpinnacle
      */
     protected $password;
 
-    public function __construct()
+    public function __construct(?HostpinnacleCredentials $credentials = null)
     {
+        $creds = $credentials ?? HostpinnacleCredentials::fromConfig();
 
-        $this->setApiKey();
-        $this->setBaseUrl();
+        $this->apiKey = $creds->getApiKey();
+        $this->senderId = $creds->getSenderId();
+        $this->username = $creds->getUsername();
+        $this->password = $creds->getPassword();
+        $this->baseUrl = $creds->getBaseUrl() ?? Config::get('hostpinnacle.baseUrl');
+
         $this->setRequestOptions();
-        $this->setSenderId();
-        $this->setUsername();
-        $this->setPassword();
     }
 
     /**
