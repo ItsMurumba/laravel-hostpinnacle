@@ -10,8 +10,16 @@ use Illuminate\Support\Facades\Auth;
 use Itsmurumba\Hostpinnacle\Http\Resources\HostpinnacleAccountResource;
 use Itsmurumba\Hostpinnacle\Models\HostpinnacleAccount;
 
+/**
+ * CRUD controller for Hostpinnacle accounts (SaaS). Responds with JSON for API/wantsJson, redirect+flash for web.
+ */
 class HostpinnacleAccountController extends Controller
 {
+    /**
+     * Get the current authenticated owner ID (from config owner key).
+     *
+     * @return int|null
+     */
     protected function ownerId(): ?int
     {
         $user = Auth::user();
@@ -21,6 +29,11 @@ class HostpinnacleAccountController extends Controller
         return (int) $user->getAuthIdentifier();
     }
 
+    /**
+     * Query scope: accounts belonging to the current owner.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder<HostpinnacleAccount>
+     */
     protected function query(): \Illuminate\Database\Eloquent\Builder
     {
         $key = config('hostpinnacle.saas.owner_key', 'user_id');
@@ -29,6 +42,11 @@ class HostpinnacleAccountController extends Controller
         return HostpinnacleAccount::query()->where($key, $ownerId);
     }
 
+    /**
+     * List the current owner's Hostpinnacle accounts.
+     *
+     * @return JsonResponse|RedirectResponse
+     */
     public function index(): JsonResponse|RedirectResponse
     {
         $accounts = $this->query()->get();
@@ -42,6 +60,12 @@ class HostpinnacleAccountController extends Controller
         return redirect()->back()->with('hostpinnacle_accounts', $accounts);
     }
 
+    /**
+     * Show a single Hostpinnacle account (owner-only).
+     *
+     * @param  HostpinnacleAccount  $account
+     * @return JsonResponse|RedirectResponse
+     */
     public function show(HostpinnacleAccount $account): JsonResponse|RedirectResponse
     {
         $this->authorizeAccount($account);
@@ -55,6 +79,11 @@ class HostpinnacleAccountController extends Controller
         return redirect()->back()->with('hostpinnacle_account', $account);
     }
 
+    /**
+     * Create a new Hostpinnacle account for the current owner.
+     *
+     * @return JsonResponse|RedirectResponse
+     */
     public function store(Request $request): JsonResponse|RedirectResponse
     {
         $validated = $request->validate([
@@ -81,6 +110,12 @@ class HostpinnacleAccountController extends Controller
         return redirect()->back()->with('success', __('Hostpinnacle account created.'));
     }
 
+    /**
+     * Update a Hostpinnacle account (owner-only).
+     *
+     * @param  HostpinnacleAccount  $account
+     * @return JsonResponse|RedirectResponse
+     */
     public function update(Request $request, HostpinnacleAccount $account): JsonResponse|RedirectResponse
     {
         $this->authorizeAccount($account);
@@ -110,6 +145,12 @@ class HostpinnacleAccountController extends Controller
         return redirect()->back()->with('success', __('Hostpinnacle account updated.'));
     }
 
+    /**
+     * Delete a Hostpinnacle account (owner-only).
+     *
+     * @param  HostpinnacleAccount  $account
+     * @return JsonResponse|RedirectResponse
+     */
     public function destroy(HostpinnacleAccount $account): JsonResponse|RedirectResponse
     {
         $this->authorizeAccount($account);
@@ -124,6 +165,12 @@ class HostpinnacleAccountController extends Controller
         return redirect()->back()->with('success', __('Hostpinnacle account deleted.'));
     }
 
+    /**
+     * Ensure the current user owns the account; abort 403 otherwise.
+     *
+     * @param  HostpinnacleAccount  $account
+     * @return void
+     */
     protected function authorizeAccount(HostpinnacleAccount $account): void
     {
         $key = config('hostpinnacle.saas.owner_key', 'user_id');

@@ -6,9 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Itsmurumba\Hostpinnacle\Models\HostpinnacleAccount;
 
-/** @mixin HostpinnacleAccount */
+/**
+ * API resource for HostpinnacleAccount. Masks api_key; never exposes password.
+ *
+ * @mixin HostpinnacleAccount
+ */
 class HostpinnacleAccountResource extends JsonResource
 {
+    /**
+     * Transform the resource into an array for JSON responses.
+     *
+     * @param  Request  $request
+     * @return array<string, mixed>
+     */
     public function toArray(Request $request): array
     {
         return [
@@ -23,6 +33,12 @@ class HostpinnacleAccountResource extends JsonResource
         ];
     }
 
+    /**
+     * Mask the API key for safe display (show first 4 and last 4 characters).
+     *
+     * @param  string|null  $value
+     * @return string|null
+     */
     private function maskApiKey(?string $value): ?string
     {
         if ($value === null || $value === '') {

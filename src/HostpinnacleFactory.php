@@ -4,6 +4,9 @@ namespace Itsmurumba\Hostpinnacle;
 
 use Itsmurumba\Hostpinnacle\Models\HostpinnacleAccount;
 
+/**
+ * Creates Hostpinnacle instances for a given account or credentials (SaaS).
+ */
 class HostpinnacleFactory
 {
     /**

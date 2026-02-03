@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Itsmurumba\Hostpinnacle\HostpinnacleCredentials;
 
+/**
+ * Stored Hostpinnacle account (credentials) for SaaS multi-account usage.
+ */
 class HostpinnacleAccount extends Model
 {
+    /** @var string|null */
     protected $table;
 
+    /** @var array<int, string> */
     protected $fillable = [
         'api_key',
         'sender_id',
@@ -19,14 +24,21 @@ class HostpinnacleAccount extends Model
         'name',
     ];
 
+    /** @var array<string, string> */
     protected $casts = [
         'password' => 'encrypted',
     ];
 
+    /** @var array<int, string> */
     protected $hidden = [
         'password',
     ];
 
+    /**
+     * Table name is read from config (hostpinnacle.saas.table).
+     *
+     * @param  array<string, mixed>  $attributes
+     */
     public function __construct(array $attributes = [])
     {
         $this->table = config('hostpinnacle.saas.table', 'hostpinnacle_accounts');
@@ -35,6 +47,8 @@ class HostpinnacleAccount extends Model
 
     /**
      * Owner of this account (e.g. User). Configure owner_model and owner_key in config.
+     *
+     * @return BelongsTo
      */
     public function owner(): BelongsTo
     {

@@ -7,10 +7,15 @@ use Itsmurumba\Hostpinnacle\Hostpinnacle;
 use Itsmurumba\Hostpinnacle\Console\InstallHostpinnaclePackage;
 use Itsmurumba\Hostpinnacle\HostpinnacleFactory;
 
+/**
+ * Service provider for the Hostpinnacle package. Registers config, migrations, routes, and bindings.
+ */
 class HostpinnacleServiceProvider extends ServiceProvider
 {
     /**
-     * Publishes all the config file this package needs to function
+     * Bootstrap the package: publish config/migrations, load SaaS routes when enabled.
+     *
+     * @return void
      */
     public function boot()
     {
@@ -43,7 +48,9 @@ class HostpinnacleServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the application services
+     * Register the package services: hostpinnacle singleton and HostpinnacleFactory.
+     *
+     * @return void
      */
     public function register()
     {
@@ -59,8 +66,9 @@ class HostpinnacleServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get the services provided by the provider
-     * @return array
+     * Get the services provided by the provider.
+     *
+     * @return array<int, string>
      */
     public function provides()
     {
