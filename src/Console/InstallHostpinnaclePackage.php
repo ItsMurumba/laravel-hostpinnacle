@@ -28,7 +28,7 @@ class InstallHostpinnaclePackage extends Command
 
         if (!$this->configExists('hostpinnacle.php')) {
             $this->publishConfiguration();
-            $this->info('Publishing hostpinnacle configuration');
+            $this->info('Published hostpinnacle configuration');
         } else {
             if ($this->shouldOverwriteConfig()) {
                 $this->info('Overwriting hostpinnacle configuration file......');
