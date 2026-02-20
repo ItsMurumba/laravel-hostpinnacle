@@ -9,17 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * Table name and owner column come from config. Set saas.table and saas.owner_key
-     * before running this migration; do not change them after, or the model will not match the schema.
+     * Table name, owner column name and owner column type come from config. Set
+     * saas.table, saas.owner_key and saas.owner_key_type before running this
+     * migration; do not change them after, or the model will not match the schema.
+     *
+     * owner_key_type: unsignedBigInteger (default), uuid, or string. Use uuid or
+     * string when your owner model uses a UUID or string primary key.
      */
     public function up(): void
     {
         $tableName = config('hostpinnacle.saas.table', 'hostpinnacle_accounts');
         $ownerKey = config('hostpinnacle.saas.owner_key', 'user_id');
+        $ownerKeyType = config('hostpinnacle.saas.owner_key_type', 'unsignedBigInteger');
 
-        Schema::create($tableName, function (Blueprint $table) use ($ownerKey) {
+        Schema::create($tableName, function (Blueprint $table) use ($ownerKey, $ownerKeyType) {
             $table->id();
-            $table->unsignedBigInteger($ownerKey)->nullable()->index();
+            match ($ownerKeyType) {
+                'uuid' => $table->uuid($ownerKey)->nullable()->index(),
+                'string' => $table->string($ownerKey)->nullable()->index(),
+                default => $table->unsignedBigInteger($ownerKey)->nullable()->index(),
+            };
             $table->string('api_key');
             $table->string('sender_id');
             $table->string('username');

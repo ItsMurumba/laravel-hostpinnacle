@@ -24,9 +24,9 @@ class InstallHostpinnaclePackage extends Command
     public function handle()
     {
         $this->info('Installing Laravel Hostpinnacle......');
-        $this->info('Publishing hostpinnacle configuration');
 
         if (!$this->configExists('hostpinnacle.php')) {
+            $this->info('Publishing hostpinnacle configuration');
             $this->publishConfiguration();
             $this->info('Published hostpinnacle configuration');
         } else {

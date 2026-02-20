@@ -65,6 +65,7 @@ return [
         'table' => 'hostpinnacle_accounts',
         'owner_type' => env('HOSTPINNACLE_SAAS_OWNER_TYPE', 'user'),
         'owner_key' => env('HOSTPINNACLE_SAAS_OWNER_KEY', 'user_id'),
+        'owner_key_type' => env('HOSTPINNACLE_SAAS_OWNER_KEY_TYPE', 'unsignedBigInteger'),
         'owner_model' => env('HOSTPINNACLE_SAAS_OWNER_MODEL', 'App\\Models\\User'),
         'encrypt_password' => env('HOSTPINNACLE_SAAS_ENCRYPT_PASSWORD', true),
         'api_routes_enabled' => env('HOSTPINNACLE_SAAS_API_ROUTES_ENABLED', true),

@@ -14,7 +14,7 @@ If you run a SaaS where each customer has their own Hostpinnacle account, you ca
    ```
 
    ::: warning Migration and config
-   The migration uses `saas.table` and `saas.owner_key` from config to create the table and owner column. **Set these values before running the migration.** Do not change `saas.table` or `saas.owner_key` after the migration has run—the model and database would no longer match, and you would need a new migration to rename the table/column.
+   The migration uses `saas.table`, `saas.owner_key` and `saas.owner_key_type` from config to create the table and owner column. **Set these values before running the migration.** Use `owner_key_type` = `uuid` or `string` if your owner model (e.g. User) has a UUID or string primary key. Do not change these after the migration has run—the model and database would no longer match, and you would need a new migration to alter the table.
    :::
 
 3. **Routes (optional):** The package registers **API** and **Web** routes for CRUD on Hostpinnacle accounts when SaaS is enabled. You can turn them on/off in config:
@@ -45,7 +45,7 @@ See [Config reference](/reference/config) for the full list. Key options:
 |-----|-------------|
 | `saas.enabled` | Turn on multi-account features (migrations, routes, `Hostpinnacle::for()`). |
 | `saas.table` | Table name for accounts (default: `hostpinnacle_accounts`). |
-| `saas.owner_type` / `saas.owner_key` / `saas.owner_model` | Owner of an account (e.g. `user`, `user_id`, `App\Models\User`). |
+| `saas.owner_type` / `saas.owner_key` / `saas.owner_key_type` / `saas.owner_model` | Owner of an account; set `owner_key_type` to `uuid` or `string` when the owner model uses a non-integer primary key. |
 | `saas.encrypt_password` | Encrypt password in DB (default: true). |
 | `saas.api_routes_enabled` / `saas.web_routes_enabled` | Enable API and/or Web CRUD routes. |
 | `saas.api_prefix` / `saas.web_prefix` | Route prefixes (e.g. `api`, `hostpinnacle`). |
