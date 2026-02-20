@@ -4,6 +4,7 @@ namespace Itsmurumba\Hostpinnacle\Exceptions;
 
 use Exception;
 
-class IsNullException extends Exception
-{
-}
+/**
+ * Exception thrown when a required value is null (e.g. missing msg or mobile for SMS).
+ */
+class IsNullException extends Exception {}
