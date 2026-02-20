@@ -32,7 +32,7 @@ class InstallHostpinnaclePackage extends Command
         } else {
             if ($this->shouldOverwriteConfig()) {
                 $this->info('Overwriting hostpinnacle configuration file......');
-                $this->publishConfiguration($force = true);
+                $this->publishConfiguration(true);
             } else {
                 $this->info('Exiting. Hostpinnacle configuration was not overwritten');
             }
