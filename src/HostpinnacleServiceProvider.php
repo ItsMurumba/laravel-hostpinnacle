@@ -48,12 +48,14 @@ class HostpinnacleServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the package services: hostpinnacle singleton and HostpinnacleFactory.
+     * Register the package services: merge default config, hostpinnacle singleton and HostpinnacleFactory.
      *
      * @return void
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/hostpinnacle.php', 'hostpinnacle');
+
         $this->app->singleton('hostpinnacle', function () {
             return new Hostpinnacle();
         });

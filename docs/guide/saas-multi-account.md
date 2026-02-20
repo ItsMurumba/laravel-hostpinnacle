@@ -13,6 +13,10 @@ If you run a SaaS where each customer has their own Hostpinnacle account, you ca
    php artisan migrate
    ```
 
+   ::: warning Migration and config
+   The migration uses `saas.table` and `saas.owner_key` from config to create the table and owner column. **Set these values before running the migration.** Do not change `saas.table` or `saas.owner_key` after the migration has run—the model and database would no longer match, and you would need a new migration to rename the table/column.
+   :::
+
 3. **Routes (optional):** The package registers **API** and **Web** routes for CRUD on Hostpinnacle accounts when SaaS is enabled. You can turn them on/off in config:
    - **API routes** — JSON; for SPAs, mobile apps, or Vue/React calling the API (e.g. `api/hostpinnacle/accounts`). Use `saas.api_routes_enabled` and middleware such as `auth:sanctum`.
    - **Web routes** — same CRUD under `web` + `auth`; support form submissions (redirect + flash) or AJAX with `Accept: application/json`. Use `saas.web_routes_enabled`. Path prefix defaults to `hostpinnacle` (e.g. `hostpinnacle/accounts`).
@@ -50,5 +54,5 @@ See [Config reference](/reference/config) for the full list. Key options:
 ## Security (SaaS)
 
 - Use **HTTPS** in production so credentials are not sent in clear text.
-- Passwords (and optionally API keys) are stored encrypted when `saas.encrypt_password` is true.
+- Passwords are stored encrypted when `saas.encrypt_password` is true.
 - Do not log credentials; the package masks `api_key` in API responses and never returns `password`.

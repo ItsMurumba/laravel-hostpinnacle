@@ -17,20 +17,23 @@ class HostpinnacleAccountController extends Controller
 {
     /**
      * Get the current authenticated owner ID (from config owner key).
+     * Supports integer or string identifiers (e.g. UUID).
      *
-     * @return int|null
+     * @return int|string|null
      */
-    protected function ownerId(): ?int
+    protected function ownerId(): int|string|null
     {
         $user = Auth::user();
         if ($user === null) {
             return null;
         }
-        return (int) $user->getAuthIdentifier();
+        return $user->getAuthIdentifier();
     }
 
     /**
      * Query scope: accounts belonging to the current owner.
+     *
+     * owner_key must match the column created by the migration (do not change saas.owner_key after migrating).
      *
      * @return \Illuminate\Database\Eloquent\Builder<HostpinnacleAccount>
      */
@@ -167,6 +170,7 @@ class HostpinnacleAccountController extends Controller
 
     /**
      * Ensure the current user owns the account; abort 403 otherwise.
+     * Comparison uses string cast so both integer and string (e.g. UUID) owner keys work.
      *
      * @param  HostpinnacleAccount  $account
      * @return void
@@ -175,7 +179,7 @@ class HostpinnacleAccountController extends Controller
     {
         $key = config('hostpinnacle.saas.owner_key', 'user_id');
         $ownerId = $this->ownerId();
-        if ((int) $account->getAttribute($key) !== $ownerId) {
+        if ($ownerId === null || (string) $account->getAttribute($key) !== (string) $ownerId) {
             abort(403, __('You do not own this Hostpinnacle account.'));
         }
     }

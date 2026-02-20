@@ -53,46 +53,6 @@ class Hostpinnacle
     }
 
     /**
-     * Set base URL from config.
-     */
-    public function setBaseUrl(): void
-    {
-        $this->baseUrl = Config::get('hostpinnacle.baseUrl');
-    }
-
-    /**
-     * Set API key from config.
-     */
-    public function setApiKey(): void
-    {
-        $this->apiKey = Config::get('hostpinnacle.apiKey');
-    }
-
-    /**
-     * Set Sender ID from config.
-     */
-    public function setSenderId(): void
-    {
-        $this->senderId = Config::get('hostpinnacle.senderId');
-    }
-
-    /**
-     * Set username from config.
-     */
-    public function setUsername(): void
-    {
-        $this->username = Config::get('hostpinnacle.username');
-    }
-
-    /**
-     * Set password from config.
-     */
-    public function setPassword(): void
-    {
-        $this->password = Config::get('hostpinnacle.password');
-    }
-
-    /**
      * Configure the Guzzle client with base URI and headers.
      */
     private function setRequestOptions(): void

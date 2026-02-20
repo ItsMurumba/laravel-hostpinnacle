@@ -43,14 +43,15 @@ class HostpinnacleCredentials
      */
     public static function fromArray(array $array): self
     {
+        $baseUrl = $array['base_url'] ?? $array['baseUrl'] ?? null;
+        $baseUrl = ($baseUrl !== null && $baseUrl !== '') ? (string) $baseUrl : null;
+
         return new self(
             (string) ($array['api_key'] ?? $array['apiKey'] ?? ''),
             (string) ($array['sender_id'] ?? $array['senderId'] ?? ''),
             (string) ($array['username'] ?? ''),
             (string) ($array['password'] ?? ''),
-            isset($array['base_url']) || isset($array['baseUrl'])
-                ? (string) ($array['base_url'] ?? $array['baseUrl'] ?? '')
-                : null
+            $baseUrl
         );
     }
 

@@ -17,7 +17,7 @@ Optionally, example views can be provided later as a reference only.
 | Component | Behaviour |
 |-----------|-----------|
 | **Config** (`config/hostpinnacle.php`) | Reads `apiKey`, `senderId`, `username`, `password`, `baseUrl` from env. |
-| **Hostpinnacle class** | Constructor calls `setApiKey()`, `setBaseUrl()`, `setSenderId()`, `setUsername()`, `setPassword()` which all use `Config::get('hostpinnacle.*')`. No way to inject credentials. |
+| **Hostpinnacle class** | Constructor accepts optional `HostpinnacleCredentials`; when null, uses `HostpinnacleCredentials::fromConfig()`. Credentials are set only in the constructor (no public setters). |
 | **Service provider** | Binds `'laravel-hostpinnacle'` → `new Hostpinnacle()` (no args). |
 | **Facade** | `Hostpinnacle` facade resolves to `'hostpinnacle'` (note: provider binds `'laravel-hostpinnacle'`; alignment should be verified). |
 | **SMS methods** | All use `$this->apiKey`, `$this->baseUrl`, `$this->username`, `$this->password`, `$this->senderId` (from constructor). |

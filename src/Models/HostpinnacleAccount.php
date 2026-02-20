@@ -35,13 +35,17 @@ class HostpinnacleAccount extends Model
     ];
 
     /**
-     * Table name is read from config (hostpinnacle.saas.table).
+     * Table name and owner key are read from config so mass assignment includes the owner column.
      *
      * @param  array<string, mixed>  $attributes
      */
     public function __construct(array $attributes = [])
     {
         $this->table = config('hostpinnacle.saas.table', 'hostpinnacle_accounts');
+        $ownerKey = config('hostpinnacle.saas.owner_key', 'user_id');
+        if (! in_array($ownerKey, $this->fillable, true)) {
+            $this->fillable = array_merge($this->fillable, [$ownerKey]);
+        }
         parent::__construct($attributes);
     }
 

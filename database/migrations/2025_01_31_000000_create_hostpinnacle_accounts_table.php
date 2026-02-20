@@ -8,6 +8,9 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * Table name and owner column come from config. Set saas.table and saas.owner_key
+     * before running this migration; do not change them after, or the model will not match the schema.
      */
     public function up(): void
     {

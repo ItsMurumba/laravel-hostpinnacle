@@ -14,12 +14,16 @@
 
 ## SaaS (`saas` array)
 
+::: warning Table and owner key
+`table` and `owner_key` are used by the published migration. Set them before running `php artisan migrate`. Do not change them after the migration has run, or the model will expect a different table/column than exists in the database.
+:::
+
 | Key | Env | Default | Description |
 |-----|-----|---------|-------------|
 | `enabled` | `HOSTPINNACLE_SAAS_ENABLED` | `false` | Turn on multi-account (migrations, routes, `Hostpinnacle::for()`) |
-| `table` | — | `hostpinnacle_accounts` | Table name for stored accounts |
+| `table` | — | `hostpinnacle_accounts` | Table name for stored accounts (set before migrating; do not change after) |
 | `owner_type` | `HOSTPINNACLE_SAAS_OWNER_TYPE` | `user` | Owner type (e.g. user, tenant) |
-| `owner_key` | `HOSTPINNACLE_SAAS_OWNER_KEY` | `user_id` | Owner foreign key column name |
+| `owner_key` | `HOSTPINNACLE_SAAS_OWNER_KEY` | `user_id` | Owner foreign key column name (set before migrating; do not change after) |
 | `owner_model` | `HOSTPINNACLE_SAAS_OWNER_MODEL` | `App\Models\User` | Eloquent model for owner relation |
 | `encrypt_password` | `HOSTPINNACLE_SAAS_ENCRYPT_PASSWORD` | `true` | Encrypt password in DB |
 | `api_routes_enabled` | `HOSTPINNACLE_SAAS_API_ROUTES_ENABLED` | `true` | Register API CRUD routes when SaaS enabled |
