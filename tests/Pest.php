@@ -11,9 +11,11 @@
 |
 */
 
+use Itsmurumba\Hostpinnacle\Tests\Support\SaasEnabledTestCase;
 use Itsmurumba\Hostpinnacle\Tests\TestCase;
 
-uses(TestCase::class)->in('Feature', 'Unit');
+uses(TestCase::class)->in('Unit');
+uses(SaasEnabledTestCase::class)->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
