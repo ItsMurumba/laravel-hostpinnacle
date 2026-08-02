@@ -13,13 +13,13 @@ the order it'll ship in.
 |---|---|---|
 | Quick SMS | Send | ✅ `Hostpinnacle::sendQuickSMS()` |
 | | Send (scheduled) | ✅ `Hostpinnacle::sendQuickScheduledSMS()` |
-| | Send with link tracking (smartlink) | 🔜 Phase 0 — optional `trackLink`/`smartLinkTitle` keys on `sendQuickSMS()` |
-| Group SMS | Send | ⚠️ `Hostpinnacle::sendGroupSMS()` — sends as **GET**; the API documents this as **POST** with a form body. Fixing in Phase 0. |
-| | Send (scheduled) | ⚠️ `Hostpinnacle::sendGroupScheduledSMS()` — same GET/POST bug |
-| | Send with link tracking (smartlink) | 🔜 Phase 0 — optional keys on `sendGroupSMS()` |
+| | Send with link tracking (smartlink) | ✅ optional `trackLink`/`smartLinkTitle` keys on `sendQuickSMS()` |
+| Group SMS | Send | ✅ `Hostpinnacle::sendGroupSMS()` — POSTs, per the API docs |
+| | Send (scheduled) | ✅ `Hostpinnacle::sendGroupScheduledSMS()` |
+| | Send with link tracking (smartlink) | ✅ optional keys on `sendGroupSMS()` |
 | File upload (mobile only) | Send | ✅ `Hostpinnacle::sendMobileOnlyFileSMS()` |
 | | Send (scheduled) | ✅ `Hostpinnacle::sendMobileOnlyFileScheduledSMS()` |
-| | Send with link tracking (smartlink) | 🔜 Phase 0 — optional keys on `sendMobileOnlyFileSMS()` |
+| | Send with link tracking (smartlink) | ✅ optional keys on `sendMobileOnlyFileSMS()` |
 | File upload (mobile + message) | Send | ✅ `Hostpinnacle::sendMobileAndMessageFileSMS()` |
 | | Send (scheduled) | ✅ `Hostpinnacle::sendMobileAndMessageFileScheduledSMS()` |
 | Schedule | Read / Update / Delete | ✅ `Hostpinnacle::schedule()->read()/update()/delete()` |
@@ -30,11 +30,15 @@ the order it'll ship in.
 | Account profile | Read status / Read profile / Update profile / Read credit history | ✅ `Hostpinnacle::accountProfile()->readStatus()/readProfile()/updateProfile()/readCreditHistory()` |
 | Password | Change | ✅ `Hostpinnacle::password()->change()` |
 | API Key | Create / Read / Update / Delete | ✅ `Hostpinnacle::apiKeys()->create()/read()/update()/delete()` |
-| Contact Group | Create / Read / Update / Delete | 🔜 Phase 4 |
-| Contact | Create / Upload / Read / Update / Delete | 🔜 Phase 4 |
+| Contact Group | Create / Read / Update / Delete | ✅ `Hostpinnacle::contactGroups()->create()/read()/update()/delete()` |
+| Contact | Create / Upload / Read / Update / Delete | ✅ `Hostpinnacle::contacts()->create()/upload()/read()/update()/delete()` |
 
 **Out of scope for now:** the Postman *environment* references an `OTP_SERVER`, but the
 collection has no OTP requests in it. Nothing to implement against until there's a spec.
+
+**Collection quirk:** despite the name, "Upload Contacts" (`/contact/upload`) takes the same
+form fields as Create Contact — no file attachment field in the sample. `ContactClient::upload()`
+matches the collection as-is rather than inventing a multipart variant that isn't documented.
 
 ## Architecture
 
