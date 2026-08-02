@@ -45,8 +45,7 @@ See [Config reference](/reference/config) for the full list. Key options:
 |-----|-------------|
 | `saas.enabled` | Turn on multi-account features (migrations, routes, `Hostpinnacle::for()`). |
 | `saas.table` | Table name for accounts (default: `hostpinnacle_accounts`). |
-| `saas.owner_type` / `saas.owner_key` / `saas.owner_key_type` / `saas.owner_model` | Owner of an account; set `owner_key_type` to `uuid` or `string` when the owner model uses a non-integer primary key. |
-| `saas.encrypt_password` | Encrypt password in DB (default: true). |
+| `saas.owner_key` / `saas.owner_key_type` / `saas.owner_model` | Owner of an account; set `owner_key_type` to `uuid` or `string` when the owner model uses a non-integer primary key. |
 | `saas.api_routes_enabled` / `saas.web_routes_enabled` | Enable API and/or Web CRUD routes. |
 | `saas.api_prefix` / `saas.web_prefix` | Route prefixes (e.g. `api`, `hostpinnacle`). |
 | `saas.api_middleware` / `saas.web_middleware` | Middleware for API and Web routes. |
@@ -54,5 +53,5 @@ See [Config reference](/reference/config) for the full list. Key options:
 ## Security (SaaS)
 
 - Use **HTTPS** in production so credentials are not sent in clear text.
-- Passwords are stored encrypted when `saas.encrypt_password` is true.
+- Passwords are always stored encrypted (`HostpinnacleAccount` casts `password` as `encrypted`).
 - Do not log credentials; the package masks `api_key` in API responses and never returns `password`.
