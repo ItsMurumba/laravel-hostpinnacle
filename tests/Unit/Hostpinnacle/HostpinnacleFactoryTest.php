@@ -69,6 +69,3 @@ test('HostpinnacleFactory for HostpinnacleAccount returns Hostpinnacle using acc
             && $request->hasHeader('apikey', 'account-key');
     });
 });
-
-// Hostpinnacle::for($account) is a thin wrapper around app(HostpinnacleFactory::class)->for($account);
-// and is covered by the factory tests above.

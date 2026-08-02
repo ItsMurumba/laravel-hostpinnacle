@@ -2,7 +2,6 @@
 
 namespace Itsmurumba\Hostpinnacle;
 
-use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Config;
 use Itsmurumba\Hostpinnacle\Exceptions\IsNullException;
@@ -15,9 +14,6 @@ class Hostpinnacle
 {
     /** @var string API key from Hostpinnacle Dashboard */
     protected $apiKey;
-
-    /** @var Client Guzzle HTTP client */
-    protected $client;
 
     /** @var mixed Last response from the API */
     protected $response;
@@ -48,46 +44,6 @@ class Hostpinnacle
         $this->username = $creds->getUsername();
         $this->password = $creds->getPassword();
         $this->baseUrl = $creds->getBaseUrl() ?? Config::get('hostpinnacle.baseUrl');
-
-        $this->setRequestOptions();
-    }
-
-    /**
-     * Configure the Guzzle client with base URI and headers.
-     */
-    private function setRequestOptions(): void
-    {
-        $this->client = new Client(
-            [
-                'base_uri' => $this->baseUrl,
-                'headers' => [
-                    'apikey' => $this->apiKey,
-                    'content-type'  => 'application/x-www-form-urlencoded',
-                    'cache-control' => 'no-cache'
-                ]
-            ]
-        );
-    }
-
-    /**
-     * Send an HTTP request and return the response.
-     *
-     * @param  string  $relativeUrl
-     * @param  string  $method
-     * @param  array<string, mixed>  $body
-     * @return \Psr\Http\Message\ResponseInterface
-     * @throws IsNullException
-     */
-    private function setHttpResponse($relativeUrl, $method, $body = [])
-    {
-        if (is_null($method)) {
-            throw new IsNullException('Method must not be null');
-        }
-
-        return $this->client->{strtolower($method)}(
-            $this->baseUrl . $relativeUrl,
-            ["body" => json_encode($body)]
-        );
     }
 
     /**

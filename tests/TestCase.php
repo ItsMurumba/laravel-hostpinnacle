@@ -8,17 +8,6 @@ use Orchestra\Testbench\TestCase as TestbenchTestCase;
 
 class TestCase extends TestbenchTestCase
 {
-
-    protected $hostpinnacle;
-    protected $mock;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->hostpinnacle = Mockery::mock('Itsmurumba\Hostpinnacle\Hostpinnacle');
-        $this->mock = Mockery::mock('GuzzleHttp\Client');
-    }
-
     protected function getPackageProviders($app)
     {
         return [
@@ -29,6 +18,12 @@ class TestCase extends TestbenchTestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('app.key', 'base64:' . base64_encode(\Illuminate\Support\Str::random(32)));
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.connections.testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
     }
 
     protected function tearDown(): void
