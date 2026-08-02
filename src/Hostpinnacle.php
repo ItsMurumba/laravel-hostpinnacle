@@ -68,6 +68,36 @@ class Hostpinnacle
     }
 
     /**
+     * Access the Sender ID API (create/read/update/delete approved sender names).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\SenderIdClient
+     */
+    public function senderId(): Api\SenderIdClient
+    {
+        return new Api\SenderIdClient($this->credentials);
+    }
+
+    /**
+     * Access the Message Template API (create/read/update/delete reusable message bodies).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\MessageTemplateClient
+     */
+    public function messageTemplate(): Api\MessageTemplateClient
+    {
+        return new Api\MessageTemplateClient($this->credentials);
+    }
+
+    /**
+     * Access the Draft API (create/read/update/delete saved title/content drafts).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\DraftClient
+     */
+    public function draft(): Api\DraftClient
+    {
+        return new Api\DraftClient($this->credentials);
+    }
+
+    /**
      * Build the payload array for Send SMS Batch, Group, or File requests.
      *
      * @param  string|null  $contacts
