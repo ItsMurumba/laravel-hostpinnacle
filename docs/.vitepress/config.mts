@@ -40,6 +40,7 @@ export default defineConfig({
         text: 'Contributing',
         items: [
           { text: 'SaaS Implementation Outline', link: '/contributing/implementation-outline' },
+          { text: 'API Coverage Roadmap', link: '/contributing/api-coverage-roadmap' },
         ],
       },
     ],
