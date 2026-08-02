@@ -16,6 +16,13 @@ Full usage docs live in `docs/` (VitePress site); package/contribution rules are
 ```
 Hostpinnacle              SMS client: sendQuickSMS, sendGroupSMS, file-upload SMS, scheduled variants.
                            Built from HostpinnacleCredentials; uses Illuminate's Http facade to call the API.
+                           Account-administration domains hang off accessors, e.g. ->schedule(): Api\ScheduleClient
+                           (see docs/contributing/api-coverage-roadmap.md for the full planned set).
+
+Api\BaseApiClient          Shared request boilerplate for the Api\* clients: userid/password/output=json
+                           defaults, apikey header, Http::asForm()->post(). One subclass per domain
+                           (Api\ScheduleClient is the first); each built from the same HostpinnacleCredentials
+                           already resolved on the parent Hostpinnacle instance.
 
 HostpinnacleCredentials    Value object holding apiKey/senderId/username/password/baseUrl.
                            ::fromConfig() reads config/hostpinnacle.php (single-account).

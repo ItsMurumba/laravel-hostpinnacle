@@ -30,6 +30,9 @@ class Hostpinnacle
     /** @var string Password for Hostpinnacle Portal */
     protected $password;
 
+    /** @var \Itsmurumba\Hostpinnacle\HostpinnacleCredentials Resolved credentials, reused by the Api\* accessors */
+    protected $credentials;
+
     /**
      * Create a new Hostpinnacle instance. Uses config when credentials are null.
      *
@@ -44,6 +47,24 @@ class Hostpinnacle
         $this->username = $creds->getUsername();
         $this->password = $creds->getPassword();
         $this->baseUrl = $creds->getBaseUrl() ?? Config::get('hostpinnacle.baseUrl');
+
+        $this->credentials = new HostpinnacleCredentials(
+            $this->apiKey,
+            $this->senderId,
+            $this->username,
+            $this->password,
+            $this->baseUrl
+        );
+    }
+
+    /**
+     * Access the Schedule API (list/reschedule/cancel scheduled SMS).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\ScheduleClient
+     */
+    public function schedule(): Api\ScheduleClient
+    {
+        return new Api\ScheduleClient($this->credentials);
     }
 
     /**

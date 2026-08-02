@@ -1,0 +1,2931 @@
+{
+    "info": {
+        "_postman_id": "27666f84-15ae-4f43-965f-0cd3e3cd39de",
+        "name": "smsportal.hostpinnacle.co.ke Send SMS API",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Send SMS",
+            "item": [
+                {
+                    "name": "Quick SMS",
+                    "item": [
+                        {
+                            "name": "Send Quick SMS",
+                            "id": "c427ba61-540e-4388-a526-088d87e9e060",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "{{API_KEY}}",
+                                        "description": "API Key",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "mobile",
+                                            "value": "{{PHONE_NUMBER}}",
+                                            "description": "Phone number of recipient",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "{{SENDER_NAME}}",
+                                            "description": "Your approved sender name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msg",
+                                            "value": "This is testing",
+                                            "description": "Your message",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "sendMethod",
+                                            "value": "quick",
+                                            "description": "Send Method",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msgType",
+                                            "value": "text",
+                                            "description": "Message type: text|unicode",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "duplicatecheck",
+                                            "value": "true",
+                                            "description": "Remove duplicates",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "test",
+                                            "value": "true",
+                                            "description": "test message without delivery",
+                                            "type": "text",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/send"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Send Quick Smartlink SMS",
+                            "id": "c2b20217-ac7a-40ca-a064-865e318ab6e9",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "{{API_KEY}}",
+                                        "description": "API Key",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "mobile",
+                                            "value": "{{PHONE_NUMBER}}",
+                                            "description": "Phone number of recipient",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "{{SENDER_NAME}}",
+                                            "description": "Your approved sender name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msg",
+                                            "value": "This is testing https:\/\/www.example.com",
+                                            "description": "Your message",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "sendMethod",
+                                            "value": "quick",
+                                            "description": "Send Method",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msgType",
+                                            "value": "text",
+                                            "description": "Message type: text|unicode",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "duplicatecheck",
+                                            "value": "true",
+                                            "description": "Remove duplicates",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "trackLink",
+                                            "value": "true",
+                                            "description": "Enable Link Tracking",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "smartLinkTitle",
+                                            "value": "My Example.com Short LInk",
+                                            "description": "Add a title to identify",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "test",
+                                            "value": "true",
+                                            "description": "test message without delivery",
+                                            "type": "text",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/send"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Send Quick Schedule SMS",
+                            "id": "b45c66ac-62b7-4803-959f-5701d12d4c99",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "{{API_KEY}}",
+                                        "description": "API Key",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "mobile",
+                                            "value": "{{PHONE_NUMBER}}",
+                                            "description": "Phone number of recipient",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "{{SENDER_NAME}}",
+                                            "description": "Your approved sender name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msg",
+                                            "value": "This is testing schedule",
+                                            "description": "Your message",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "sendMethod",
+                                            "value": "quick",
+                                            "description": "Send Method",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msgType",
+                                            "value": "text",
+                                            "description": "Message type: text|unicode",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "scheduleTime",
+                                            "value": "2019-09-16 13:24",
+                                            "description": "Add your schedule Timestamp in YYYY-MM-DD HH:MM format",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "duplicatecheck",
+                                            "value": "true",
+                                            "description": "Remove duplicates",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "test",
+                                            "value": "true",
+                                            "description": "test message without delivery",
+                                            "type": "text",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/send"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "477ac52a-3080-40c6-a4d4-5149aff8b77a"
+                },
+                {
+                    "name": "Group SMS",
+                    "item": [
+                        {
+                            "name": "Send Group SMS",
+                            "id": "0330acc3-5cce-4050-af2f-9cb90c34a1e1",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "{{API_KEY}}",
+                                        "description": "API Key",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "group",
+                                            "value": "{{GROUP_NAME}}",
+                                            "description": "Phone number of recipient",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "{{SENDER_NAME}}",
+                                            "description": "Your approved sender name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msg",
+                                            "value": "This is testing",
+                                            "description": "Your message",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "sendMethod",
+                                            "value": "group",
+                                            "description": "Send Method",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msgType",
+                                            "value": "text",
+                                            "description": "Message type: text|unicode",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "duplicatecheck",
+                                            "value": "true",
+                                            "description": "Remove duplicates",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "test",
+                                            "value": "true",
+                                            "description": "test message without delivery",
+                                            "type": "text",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/send"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Send Group Schedule SMS",
+                            "id": "db36c031-6974-4261-b209-dc1550b9e44d",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "{{API_KEY}}",
+                                        "description": "API Key",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "group",
+                                            "value": "{{GROUP_NAME}}",
+                                            "description": "Phone number of recipient",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "{{SENDER_NAME}}",
+                                            "description": "Your approved sender name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msg",
+                                            "value": "This is testing",
+                                            "description": "Your message",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "sendMethod",
+                                            "value": "group",
+                                            "description": "Send Method",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msgType",
+                                            "value": "text",
+                                            "description": "Message type: text|unicode",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "scheduleTime",
+                                            "value": "2019-09-16 13:24",
+                                            "description": "Add your schedule Timestamp in YYYY-MM-DD HH:MM format",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "duplicatecheck",
+                                            "value": "true",
+                                            "description": "Remove duplicates",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "test",
+                                            "value": "true",
+                                            "description": "test message without delivery",
+                                            "type": "text",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/send"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Send Group Smartlink SMS",
+                            "id": "92b0fc99-5c9b-4bde-81bb-76eb7ceed8c9",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "{{API_KEY}}",
+                                        "description": "API Key",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "group",
+                                            "value": "{{GROUP_NAME}}",
+                                            "description": "Phone number of recipient",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "{{SENDER_NAME}}",
+                                            "description": "Your approved sender name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msg",
+                                            "value": "This is testing https:\/\/www.example.com",
+                                            "description": "Your message",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "sendMethod",
+                                            "value": "group",
+                                            "description": "Send Method",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "msgType",
+                                            "value": "text",
+                                            "description": "Message type: text|unicode",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "duplicatecheck",
+                                            "value": "true",
+                                            "description": "Remove duplicates",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "trackLink",
+                                            "value": "true",
+                                            "description": "Enable Link Tracking",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "smartLinkTitle",
+                                            "value": "My Example.com Short LInk",
+                                            "description": "Add a title to identify",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "test",
+                                            "value": "true",
+                                            "description": "test message without delivery",
+                                            "type": "text",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/send"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "79619a96-b35a-4fce-bf85-9bab917428a0"
+                },
+                {
+                    "name": "File upload",
+                    "item": [
+                        {
+                            "name": "Mobile only",
+                            "item": [
+                                {
+                                    "name": "Send File Upload with Mobile only",
+                                    "id": "43a57180-3013-4ca1-9f27-020f6b949644",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "apikey",
+                                                "value": "{{API_KEY}}",
+                                                "description": "API Key",
+                                                "disabled": true
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "userid",
+                                                    "value": "{{USER_ID}}",
+                                                    "description": "Your Username",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "password",
+                                                    "value": "{{PASSWORD}}",
+                                                    "description": "Your Password",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "senderid",
+                                                    "value": "{{SENDER_NAME}}",
+                                                    "description": "Your approved sender name",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "sendMethod",
+                                                    "value": "bulkupload",
+                                                    "description": "Send Method",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "file",
+                                                    "description": "Upload file as per sample shown in UI.",
+                                                    "type": "file",
+                                                    "src": []
+                                                },
+                                                {
+                                                    "key": "msgType",
+                                                    "value": "text",
+                                                    "description": "Message type: text|unicode",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "msg",
+                                                    "value": "This is testing from file upload with mobile only",
+                                                    "description": "Add your message to send message",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "output",
+                                                    "value": "json",
+                                                    "description": "Output format: json|plain|xml",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "duplicatecheck",
+                                                    "value": "true",
+                                                    "description": "Remove duplicates",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "test",
+                                                    "value": "true",
+                                                    "description": "test message without delivery",
+                                                    "type": "text",
+                                                    "disabled": true
+                                                }
+                                            ]
+                                        },
+                                        "url": "{{SERVER}}\/send"
+                                    },
+                                    "response": []
+                                },
+                                {
+                                    "name": "Send File Upload Smartlink with Mobile only",
+                                    "id": "9adda89e-09ce-45bb-b9c8-0037a981be33",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "apikey",
+                                                "value": "{{API_KEY}}",
+                                                "description": "API Key",
+                                                "disabled": true
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "userid",
+                                                    "value": "{{USER_ID}}",
+                                                    "description": "Your Username",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "password",
+                                                    "value": "{{PASSWORD}}",
+                                                    "description": "Your Password",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "senderid",
+                                                    "value": "{{SENDER_NAME}}",
+                                                    "description": "Your approved sender name",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "file",
+                                                    "description": "Upload file as per sample shown in UI.",
+                                                    "type": "file",
+                                                    "src": []
+                                                },
+                                                {
+                                                    "key": "msg",
+                                                    "value": "This is testing https:\/\/www.example.com",
+                                                    "description": "Your message",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "sendMethod",
+                                                    "value": "bulkupload",
+                                                    "description": "Send Method",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "msgType",
+                                                    "value": "text",
+                                                    "description": "Message type: text|unicode",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "output",
+                                                    "value": "json",
+                                                    "description": "Output format: json|plain|xml",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "duplicatecheck",
+                                                    "value": "true",
+                                                    "description": "Remove duplicates",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "trackLink",
+                                                    "value": "true",
+                                                    "description": "Enable Link Tracking",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "smartLinkTitle",
+                                                    "value": "My Example.com Short LInk",
+                                                    "description": "Add a title to identify",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "test",
+                                                    "value": "true",
+                                                    "description": "test message without delivery",
+                                                    "type": "text",
+                                                    "disabled": true
+                                                }
+                                            ]
+                                        },
+                                        "url": "{{SERVER}}\/send"
+                                    },
+                                    "response": []
+                                },
+                                {
+                                    "name": "Send File Upload Schedule with Mobile only",
+                                    "id": "04c3f0ba-f5ec-4aeb-adfd-5ffd02bc49b5",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "apikey",
+                                                "value": "{{API_KEY}}",
+                                                "description": "API Key",
+                                                "disabled": true
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "userid",
+                                                    "value": "{{USER_ID}}",
+                                                    "description": "Your Username",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "password",
+                                                    "value": "{{PASSWORD}}",
+                                                    "description": "Your Password",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "senderid",
+                                                    "value": "{{SENDER_NAME}}",
+                                                    "description": "Your approved sender name",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "file",
+                                                    "description": "Upload file as per sample shown in UI.",
+                                                    "type": "file",
+                                                    "src": []
+                                                },
+                                                {
+                                                    "key": "msg",
+                                                    "value": "This is testing https:\/\/www.example.com",
+                                                    "description": "Your message",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "sendMethod",
+                                                    "value": "bulkupload",
+                                                    "description": "Send Method",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "msgType",
+                                                    "value": "text",
+                                                    "description": "Message type: text|unicode",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "output",
+                                                    "value": "json",
+                                                    "description": "Output format: json|plain|xml",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "duplicatecheck",
+                                                    "value": "true",
+                                                    "description": "Remove duplicates",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "scheduleTime",
+                                                    "value": "2019-09-16 13:24",
+                                                    "description": "Add your schedule Timestamp in YYYY-MM-DD HH:MM format",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "test",
+                                                    "value": "true",
+                                                    "description": "test message without delivery",
+                                                    "type": "text",
+                                                    "disabled": true
+                                                }
+                                            ]
+                                        },
+                                        "url": "{{SERVER}}\/send"
+                                    },
+                                    "response": []
+                                }
+                            ],
+                            "id": "fefb3130-2d98-4ae6-80d7-5c6a6d21f105"
+                        },
+                        {
+                            "name": "Mobile and Message",
+                            "item": [
+                                {
+                                    "name": "Send File Upload with Mobile and Message",
+                                    "id": "95eae6ee-07a7-4610-b2be-726389a979a5",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "apikey",
+                                                "value": "{{API_KEY}}",
+                                                "description": "API Key",
+                                                "disabled": true
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "userid",
+                                                    "value": "{{USER_ID}}",
+                                                    "description": "Your Username",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "password",
+                                                    "value": "{{PASSWORD}}",
+                                                    "description": "Your Password",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "senderid",
+                                                    "value": "{{SENDER_NAME}}",
+                                                    "description": "Your approved sender name",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "sendMethod",
+                                                    "value": "bulkupload",
+                                                    "description": "Send Method",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "file",
+                                                    "description": "Upload file as per sample shown in UI. Mobile and message within the file",
+                                                    "type": "file",
+                                                    "src": []
+                                                },
+                                                {
+                                                    "key": "msgType",
+                                                    "value": "text",
+                                                    "description": "Message type: text|unicode",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "output",
+                                                    "value": "json",
+                                                    "description": "Output format: json|plain|xml",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "duplicatecheck",
+                                                    "value": "true",
+                                                    "description": "Remove duplicates",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "test",
+                                                    "value": "true",
+                                                    "description": "test message without delivery",
+                                                    "type": "text",
+                                                    "disabled": true
+                                                }
+                                            ]
+                                        },
+                                        "url": "{{SERVER}}\/send"
+                                    },
+                                    "response": []
+                                },
+                                {
+                                    "name": "Send File Upload Schedule with Mobile and Message",
+                                    "id": "6bcc0fd4-d802-4969-9cee-381de6681d30",
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [
+                                            {
+                                                "key": "apikey",
+                                                "value": "{{API_KEY}}",
+                                                "description": "API Key",
+                                                "disabled": true
+                                            }
+                                        ],
+                                        "body": {
+                                            "mode": "formdata",
+                                            "formdata": [
+                                                {
+                                                    "key": "userid",
+                                                    "value": "{{USER_ID}}",
+                                                    "description": "Your Username",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "password",
+                                                    "value": "{{PASSWORD}}",
+                                                    "description": "Your Password",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "senderid",
+                                                    "value": "{{SENDER_NAME}}",
+                                                    "description": "Your approved sender name",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "sendMethod",
+                                                    "value": "bulkupload",
+                                                    "description": "Send Method",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "file",
+                                                    "description": "Upload file as per sample shown in UI. Mobile and message within the file",
+                                                    "type": "file",
+                                                    "src": []
+                                                },
+                                                {
+                                                    "key": "msgType",
+                                                    "value": "text",
+                                                    "description": "Message type: text|unicode",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "scheduleTime",
+                                                    "value": "2019-09-16 13:24",
+                                                    "description": "Add your schedule Timestamp in YYYY-MM-DD HH:MM format",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "output",
+                                                    "value": "json",
+                                                    "description": "Output format: json|plain|xml",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "duplicatecheck",
+                                                    "value": "true",
+                                                    "description": "Remove duplicates",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "key": "test",
+                                                    "value": "true",
+                                                    "description": "test message without delivery",
+                                                    "type": "text",
+                                                    "disabled": true
+                                                }
+                                            ]
+                                        },
+                                        "url": "{{SERVER}}\/send"
+                                    },
+                                    "response": []
+                                }
+                            ],
+                            "id": "60466590-9f05-4501-a077-cbf6563d8076"
+                        }
+                    ],
+                    "id": "81332981-0b23-4c76-af55-253d7ffd6d58"
+                }
+            ],
+            "id": "edd90aae-581f-4b55-9e11-a4b59cab80d8"
+        },
+        {
+            "name": "Schedule",
+            "item": [
+                {
+                    "name": "Read",
+                    "id": "6267be05-0c3d-41c5-8b28-50c37f0c13ae",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "userid",
+                                    "value": "{{USER_ID}}",
+                                    "description": "Your Username",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "{{PASSWORD}}",
+                                    "description": "Your Password",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "fromdate",
+                                    "value": "2026-08-01",
+                                    "description": "From Date",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "todate",
+                                    "value": "2026-08-31",
+                                    "description": "To Date",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "output",
+                                    "value": "json",
+                                    "description": "Output format: json|plain|xml",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": "{{SERVER}}\/schedule\/read"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update",
+                    "id": "5a7202a6-4c02-49df-b501-87897b98784b",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "userid",
+                                    "value": "{{USER_ID}}",
+                                    "description": "Your Username",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "{{PASSWORD}}",
+                                    "description": "Your Password",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "scheduletime",
+                                    "value": "2022-09-13 00:09",
+                                    "description": "schedule time to update",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "uuid",
+                                    "value": "1234",
+                                    "description": "Transaction ID of the scheduled message",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "output",
+                                    "value": "json",
+                                    "description": "Output format: json|plain|xml",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": "{{SERVER}}\/schedule\/update"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete",
+                    "id": "3952244e-cf1b-40df-b604-d7ec38074be2",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "userid",
+                                    "value": "{{USER_ID}}",
+                                    "description": "Your Username",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "{{PASSWORD}}",
+                                    "description": "Your Password",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "uuid",
+                                    "value": "1234",
+                                    "description": "Transaction ID of the scheduled message",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "output",
+                                    "value": "json",
+                                    "description": "Output format: json|plain|xml",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": "{{SERVER}}\/schedule\/delete"
+                    },
+                    "response": []
+                }
+            ],
+            "id": "e22df901-75d0-4411-a734-b726a01ec086"
+        },
+        {
+            "name": "Account",
+            "item": [
+                {
+                    "name": "SenderId",
+                    "item": [
+                        {
+                            "name": "Create SenderId",
+                            "id": "713b5ede-3b6c-4e88-8411-5ec0b01e805b",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "add sender name here",
+                                            "description": "Add required sender name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/senderid\/create"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read SenderId",
+                            "id": "25733901-9a05-4a76-a038-02483d8208fe",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/senderid\/read?userid={{USER_ID}}&password={{PASSWORD}}&output=json",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "senderid",
+                                        "read"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update SenderId",
+                            "id": "0388fbb9-5570-4353-b776-b3baf30e1cbf",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "modify sender name to update",
+                                            "description": "Add required sender name to modify",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "69",
+                                            "description": "Sender name update ID",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/senderid\/update"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete SenderId",
+                            "id": "6eea8f0f-ed6c-499c-bcd1-7d896516c997",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "61,68",
+                                            "description": "Delete multiple sender name by ids separated by comma",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "senderid",
+                                            "value": "ABCDEF1,ABCDEF2,ABCDEF4",
+                                            "type": "text",
+                                            "description": "Delete multiple sender name by sender name separated by comma",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/senderid\/delete"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "6cf1dca1-7134-47c8-a9e2-d0ea8c3f4737"
+                },
+                {
+                    "name": "Message Template",
+                    "item": [
+                        {
+                            "name": "Create Message Template",
+                            "id": "5abc7e31-7e85-42ca-8126-7eed8d5f94ee",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "message",
+                                            "value": "This is test message ###123### from Test",
+                                            "description": "Add your template",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/template\/create"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read Message Template",
+                            "id": "eee408d0-3aa3-42f2-9873-71a36477be5a",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/template\/read?userid={{USER_ID}}&password={{PASSWORD}}&output=json",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "template",
+                                        "read"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Message Template",
+                            "id": "9fcefc1d-3b32-45bc-9b19-12958e955991",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "message",
+                                            "value": "This is test message to update or modify",
+                                            "description": "Add your template to modify",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "2",
+                                            "description": "Update ID",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/template\/update"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete Message Template",
+                            "id": "936a2c65-05b7-4dbe-a174-eb02d2bb9dd4",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "2,1",
+                                            "description": "Delete multiple sender name by ids separated by comma",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/template\/delete"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "26377f4c-74c5-4d95-b6a3-2cb054b394de"
+                },
+                {
+                    "name": "Draft",
+                    "item": [
+                        {
+                            "name": "Create Draft",
+                            "id": "83ce70e1-9956-44fb-bbd3-ca9de489ed4e",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "title",
+                                            "value": "This is a new draft title.",
+                                            "description": "Add your draft title to remember",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "content",
+                                            "value": "This is a new draft content.",
+                                            "description": "Add your draft content",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/draft\/create"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read Draft",
+                            "id": "b2155c89-f964-462e-8978-97a4a6b91974",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/draft\/read?userid={{USER_ID}}&password={{PASSWORD}}&output=json",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "draft",
+                                        "read"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Draft",
+                            "id": "ef5ac3b9-4c16-4dd3-9436-ae0e84d14d35",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "title",
+                                            "value": "Title to modify",
+                                            "description": "Add your draft title to modify",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "content",
+                                            "value": "Modify my existing draft",
+                                            "description": "Add your draft content to modify",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "15",
+                                            "description": "Draft ID to update",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/draft\/update"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete Draft",
+                            "id": "7f7ec534-10d1-4993-8b5b-acfda37d5f1e",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "15,121",
+                                            "description": "Delete multiple drafts by ids separated by comma",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/draft\/delete"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "fd898c82-8e70-4682-87bc-0239a7d8929f"
+                },
+                {
+                    "name": "Webhook",
+                    "item": [
+                        {
+                            "name": "Create Webhook",
+                            "id": "edb49715-f613-47ce-9ecd-dc633afb96dc",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "smswebhook",
+                                            "value": "https:\/\/google.com",
+                                            "description": "Add your webhook endpoint to receive real time DLR",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "smswebhookrate",
+                                            "value": "10",
+                                            "description": "Webhook TPS",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/webhook\/create"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read Webhook",
+                            "id": "1c2abd58-5cb4-4c4c-921c-06c0699e01da",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/webhook\/read?output=json&userid=uitest&password=Uitest@123",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "webhook",
+                                        "read"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Webhook",
+                            "id": "b246612e-95b2-43d3-8f5b-e8bf539a1cab",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "smswebhook",
+                                            "value": "https:\/\/test.com",
+                                            "description": "Modify your webhook endpoint to receive real time DLR",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/webhook\/update"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete Webhook",
+                            "id": "cd2101e0-2078-449b-8301-19b603136103",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/webhook\/delete"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "7d52bf17-df95-425f-afec-2b7536cde386"
+                },
+                {
+                    "name": "Account",
+                    "item": [
+                        {
+                            "name": "Read Account Status",
+                            "id": "81b658ab-bcb9-41e8-bfcb-52799ae5a807",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/account\/readstatus?userid={{USER_ID}}&password={{PASSWORD}}&output=json",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "account",
+                                        "readstatus"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read Profile",
+                            "id": "fffe4e36-599a-46ff-bf4d-aeaa834998a7",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/account\/readprofile?userid={{USER_ID}}&password={{PASSWORD}}&output=json",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "account",
+                                        "readprofile"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Profile",
+                            "id": "832701d1-5416-4238-9478-34af1c043da2",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "fullname",
+                                            "value": "Testing",
+                                            "description": "Mofify your full name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "address",
+                                            "value": "Mumbai NakaMumbai YES DONE",
+                                            "description": "Mofify your address here",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "region",
+                                            "value": "Maharashtra",
+                                            "description": "Mofify your region here",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "country",
+                                            "value": "India",
+                                            "description": "",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "city",
+                                            "value": "Mumbai",
+                                            "description": "Mofify your city here",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "profilepic",
+                                            "type": "file",
+                                            "description": "Update your profile picture",
+                                            "src": [],
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/account\/updateprofile"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read Credit History",
+                            "id": "b829721f-247e-4838-9b66-7c3aa747396b",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "fromdate",
+                                            "value": "2026-08-01",
+                                            "description": "From date to read credit history",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "todate",
+                                            "value": "2026-08-31",
+                                            "description": "To date to read credit history",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/account\/readcredithistory"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "633d1f92-7259-4b70-b839-5c3f525a1cb0"
+                },
+                {
+                    "name": "Password",
+                    "item": [
+                        {
+                            "name": "Change Password",
+                            "id": "4a73ac72-1031-4e9c-b912-476be9431845",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "newpassword",
+                                            "value": "new password here",
+                                            "description": "new password here",
+                                            "type": "password"
+                                        },
+                                        {
+                                            "key": "confirmpassword",
+                                            "value": "confirm password here",
+                                            "description": "confirm password here",
+                                            "type": "password"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/password\/change"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "c2f48254-f325-4cd1-b6f8-a09d71c2e44b"
+                },
+                {
+                    "name": "Api Key",
+                    "item": [
+                        {
+                            "name": "Create API Key",
+                            "id": "43d9276d-d929-4a51-a1d4-60f822bd6fb1",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/apikey\/create"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read API Key",
+                            "id": "8c90ee9c-8c2b-44ab-b4e8-5725bc230399",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/apikey\/read?output=json&userid={{USER_ID}}&password={{PASSWORD}}",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "apikey",
+                                        "read"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update API Key",
+                            "id": "b6e3d983-699e-4e0e-8f3f-bab7d6aae1a4",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/apikey\/update"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete API Key",
+                            "id": "642e208b-a991-4f99-a246-6eeef55debc1",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/apikey\/delete"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "76c8c214-9dbe-4551-b705-c051253a5cae"
+                },
+                {
+                    "name": "Group",
+                    "item": [
+                        {
+                            "name": "Create Group",
+                            "id": "8a055359-180b-4416-8e5d-ff5dcee2b9ac",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupname",
+                                            "value": "myNewGroup",
+                                            "description": "Add group name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/group\/create"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read Group",
+                            "id": "14889105-93f2-45a9-98c8-41f1a97845ee",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/group\/read?output=xml&userid={{USER_ID}}&password={{PASSWORD}}",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "group",
+                                        "read"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Group",
+                            "id": "6aab589c-e5ba-446f-9fb6-3105b8a99617",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupname",
+                                            "value": "updateGroupName",
+                                            "description": "Update group name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "10",
+                                            "description": "Update group ID",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/group\/update"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete Group",
+                            "id": "22e1aa07-8218-4c72-86ab-1e5ca1900904",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "10",
+                                            "description": "Delete multiple groups by ids separated by comma",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupname",
+                                            "value": "group1,group2,group3",
+                                            "description": "Delete multiple groups by group names separated by comma",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/group\/delete"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "dbdedb7a-0c0e-476b-b776-a63350b2b86b"
+                },
+                {
+                    "name": "Contact",
+                    "item": [
+                        {
+                            "name": "Create Contact",
+                            "id": "09446cee-9dcf-4cf6-b743-7a97446049a9",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "contactname",
+                                            "value": "TEST NAME",
+                                            "description": "Add new contact full name to this group",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "mobileno",
+                                            "value": "911232987678",
+                                            "description": "Add new contact mobile number to this group",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupid",
+                                            "value": "1",
+                                            "description": "Add new contact to this group ID",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupname",
+                                            "value": "myGroup",
+                                            "description": "Add new contact to this group name",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/contact\/create"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Upload Contacts",
+                            "id": "559b2e8b-3df5-4207-ac8f-6b0497575ea2",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "contactname",
+                                            "value": "TEST NAME",
+                                            "description": "Update contact full name to this group",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "mobileno",
+                                            "value": "919999999999",
+                                            "description": "Update contact mobile number to this group",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupid",
+                                            "value": "1",
+                                            "description": "Update contact to this group ID",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupname",
+                                            "value": "myGroup",
+                                            "description": "Update contact to this group name",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/contact\/upload"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Read Contact",
+                            "id": "50d2d8dd-ff0b-4058-b529-e5268b7e14a2",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{SERVER}}\/contact\/read?output=json&userid={{USER_ID}}&password={{PASSWORD}}",
+                                    "host": [
+                                        "{{SERVER}}"
+                                    ],
+                                    "path": [
+                                        "contact",
+                                        "read"
+                                    ],
+                                    "query": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupname",
+                                            "value": "myGroup",
+                                            "description": "View all contacts from this specific group name",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Update Contact",
+                            "id": "c1973968-0bde-47be-a9d8-dcf50ce67aeb",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "contactname",
+                                            "value": "TEST NAME",
+                                            "description": "Update contact full name to this group",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "mobileno",
+                                            "value": "919999999999",
+                                            "description": "Update contact mobile number to this group",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupid",
+                                            "value": "1",
+                                            "description": "Update contact to this group ID",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "7",
+                                            "description": "Update specific contact to this contact ID",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "groupname",
+                                            "value": "myGroup",
+                                            "description": "Update contact to this group name",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/contact\/update"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Delete Contact",
+                            "id": "8bd17752-97cc-49f9-aaaa-e36f2e63ff08",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "apikey",
+                                        "value": "asdfsdghfsdaewSDASFDFGD",
+                                        "description": "Add API Key here",
+                                        "disabled": true
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "formdata",
+                                    "formdata": [
+                                        {
+                                            "key": "userid",
+                                            "value": "{{USER_ID}}",
+                                            "description": "Your Username",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "password",
+                                            "value": "{{PASSWORD}}",
+                                            "description": "Your Password",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "id",
+                                            "value": "4,5,1",
+                                            "description": "Delete multiple contacts by ids separated by comma",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "output",
+                                            "value": "json",
+                                            "description": "Output format: json|plain|xml",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": "{{SERVER}}\/contact\/delete"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "a0a94b82-c52d-4864-9bb5-3b830e4b530c"
+                }
+            ],
+            "id": "0faa8e0c-d17a-4380-9a83-2339fc1c3bfe"
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "bf5e5df5-ba6c-44da-8738-f4e6f0b611c1",
+                "type": "text\/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "id": "4b3a4b6a-7ed1-4f31-8f0b-7266907378f8",
+                "type": "text\/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ]
+}
