@@ -138,6 +138,26 @@ class Hostpinnacle
     }
 
     /**
+     * Access the Contact Group API (create/read/update/delete named contact groups).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\ContactGroupClient
+     */
+    public function contactGroups(): Api\ContactGroupClient
+    {
+        return new Api\ContactGroupClient($this->credentials);
+    }
+
+    /**
+     * Access the Contact API (create/upload/read/update/delete contacts).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\ContactClient
+     */
+    public function contacts(): Api\ContactClient
+    {
+        return new Api\ContactClient($this->credentials);
+    }
+
+    /**
      * Build the payload array for Send SMS Batch, Group, or File requests.
      *
      * @param  string|null  $contacts
