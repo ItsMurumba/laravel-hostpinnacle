@@ -37,6 +37,16 @@ $response = Hostpinnacle::for($account)->sendQuickSMS(['mobile' => '254720xxxxxx
 
 You can also pass `HostpinnacleCredentials` to `Hostpinnacle::for($credentials)` if you have a value object instead of a model.
 
+`Hostpinnacle::for($account)` also gives you every account-administration client documented in
+[Usage](/guide/usage#account-administration), scoped to that account's credentials:
+
+```php
+$response = Hostpinnacle::for($account)->schedule()->read([
+    'fromdate' => '2026-08-01',
+    'todate' => '2026-08-31',
+]);
+```
+
 ## Config options (SaaS)
 
 See [Config reference](/reference/config) for the full list. Key options:
