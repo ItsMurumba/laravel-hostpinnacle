@@ -98,6 +98,46 @@ class Hostpinnacle
     }
 
     /**
+     * Access the Webhook API (create/read/update/delete the DLR webhook endpoint).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\WebhookClient
+     */
+    public function webhook(): Api\WebhookClient
+    {
+        return new Api\WebhookClient($this->credentials);
+    }
+
+    /**
+     * Access the Account Profile API (status/profile/credit history of the remote Hostpinnacle account).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\AccountProfileClient
+     */
+    public function accountProfile(): Api\AccountProfileClient
+    {
+        return new Api\AccountProfileClient($this->credentials);
+    }
+
+    /**
+     * Access the Password API (change the Hostpinnacle portal password).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\PasswordClient
+     */
+    public function password(): Api\PasswordClient
+    {
+        return new Api\PasswordClient($this->credentials);
+    }
+
+    /**
+     * Access the API Key API (create/read/update/delete the API key).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\ApiKeyClient
+     */
+    public function apiKeys(): Api\ApiKeyClient
+    {
+        return new Api\ApiKeyClient($this->credentials);
+    }
+
+    /**
      * Build the payload array for Send SMS Batch, Group, or File requests.
      *
      * @param  string|null  $contacts

@@ -26,10 +26,10 @@ the order it'll ship in.
 | Sender ID | Create / Read / Update / Delete | ✅ `Hostpinnacle::senderId()->create()/read()/update()/delete()` |
 | Message Template | Create / Read / Update / Delete | ✅ `Hostpinnacle::messageTemplate()->create()/read()/update()/delete()` |
 | Draft | Create / Read / Update / Delete | ✅ `Hostpinnacle::draft()->create()/read()/update()/delete()` |
-| Webhook | Create / Read / Update / Delete | 🔜 Phase 3 |
-| Account profile | Read status / Read profile / Update profile / Read credit history | 🔜 Phase 3 |
-| Password | Change | 🔜 Phase 3 |
-| API Key | Create / Read / Update / Delete | 🔜 Phase 3 |
+| Webhook | Create / Read / Update / Delete | ✅ `Hostpinnacle::webhook()->create()/read()/update()/delete()` |
+| Account profile | Read status / Read profile / Update profile / Read credit history | ✅ `Hostpinnacle::accountProfile()->readStatus()/readProfile()/updateProfile()/readCreditHistory()` |
+| Password | Change | ✅ `Hostpinnacle::password()->change()` |
+| API Key | Create / Read / Update / Delete | ✅ `Hostpinnacle::apiKeys()->create()/read()/update()/delete()` |
 | Contact Group | Create / Read / Update / Delete | 🔜 Phase 4 |
 | Contact | Create / Upload / Read / Update / Delete | 🔜 Phase 4 |
 
