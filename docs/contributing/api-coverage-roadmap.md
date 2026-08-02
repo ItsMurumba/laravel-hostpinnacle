@@ -104,9 +104,11 @@ Each phase is sized to ship as one PR.
 - **Phase 0 — fix + smartlink.** Fix `sendGroupSMS`/`sendGroupScheduledSMS` to POST instead
   of GET. Add optional `trackLink`/`smartLinkTitle` keys to `sendQuickSMS`, `sendGroupSMS`,
   `sendMobileOnlyFileSMS` (no new methods — the collection has no smartlink+scheduled
-  variant, so scheduled sends are untouched). Introduce `Api\BaseApiClient`.
-- **Phase 1 — Schedule.** `ScheduleClient::read()/update()/delete()`. Smallest domain, first
-  real user of `BaseApiClient`, validates the pattern before the bigger phases.
+  variant, so scheduled sends are untouched). No `Api\BaseApiClient` here — it'd have no
+  caller yet, which is just scaffolding-for-later.
+- **Phase 1 — Schedule.** Introduce `Api\BaseApiClient` and `ScheduleClient::read()/update()/delete()`
+  together — `ScheduleClient` is `BaseApiClient`'s first real consumer, validating the
+  pattern before the bigger phases reuse it.
 - **Phase 2 — setup resources.** `SenderIdClient`, `MessageTemplateClient`, `DraftClient`
   (12 endpoints) — things you configure before/while sending.
 - **Phase 3 — account administration.** `WebhookClient`, `AccountProfileClient`,
