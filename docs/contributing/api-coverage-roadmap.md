@@ -22,7 +22,7 @@ the order it'll ship in.
 | | Send with link tracking (smartlink) | 🔜 Phase 0 — optional keys on `sendMobileOnlyFileSMS()` |
 | File upload (mobile + message) | Send | ✅ `Hostpinnacle::sendMobileAndMessageFileSMS()` |
 | | Send (scheduled) | ✅ `Hostpinnacle::sendMobileAndMessageFileScheduledSMS()` |
-| Schedule | Read / Update / Delete | 🔜 Phase 1 |
+| Schedule | Read / Update / Delete | ✅ `Hostpinnacle::schedule()->read()/update()/delete()` |
 | Sender ID | Create / Read / Update / Delete | 🔜 Phase 2 |
 | Message Template | Create / Read / Update / Delete | 🔜 Phase 2 |
 | Draft | Create / Read / Update / Delete | 🔜 Phase 2 |
