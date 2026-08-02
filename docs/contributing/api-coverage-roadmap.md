@@ -23,9 +23,9 @@ the order it'll ship in.
 | File upload (mobile + message) | Send | ✅ `Hostpinnacle::sendMobileAndMessageFileSMS()` |
 | | Send (scheduled) | ✅ `Hostpinnacle::sendMobileAndMessageFileScheduledSMS()` |
 | Schedule | Read / Update / Delete | ✅ `Hostpinnacle::schedule()->read()/update()/delete()` |
-| Sender ID | Create / Read / Update / Delete | 🔜 Phase 2 |
-| Message Template | Create / Read / Update / Delete | 🔜 Phase 2 |
-| Draft | Create / Read / Update / Delete | 🔜 Phase 2 |
+| Sender ID | Create / Read / Update / Delete | ✅ `Hostpinnacle::senderId()->create()/read()/update()/delete()` |
+| Message Template | Create / Read / Update / Delete | ✅ `Hostpinnacle::messageTemplate()->create()/read()/update()/delete()` |
+| Draft | Create / Read / Update / Delete | ✅ `Hostpinnacle::draft()->create()/read()/update()/delete()` |
 | Webhook | Create / Read / Update / Delete | 🔜 Phase 3 |
 | Account profile | Read status / Read profile / Update profile / Read credit history | 🔜 Phase 3 |
 | Password | Change | 🔜 Phase 3 |

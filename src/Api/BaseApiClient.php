@@ -43,4 +43,24 @@ abstract class BaseApiClient
             'cache-control' => 'no-cache',
         ])->post($this->baseUrl . $endpoint, $payload);
     }
+
+    /**
+     * GET $endpoint with the shared userid/password/output=json fields merged in as query params.
+     *
+     * @param  array<string, mixed>  $query
+     * @return \Illuminate\Http\Client\Response
+     */
+    protected function get(string $endpoint, array $query = [])
+    {
+        $payload = array_merge([
+            'userid' => $this->credentials->getUsername(),
+            'password' => $this->credentials->getPassword(),
+            'output' => 'json',
+        ], $query);
+
+        return Http::withHeaders([
+            'apikey' => $this->credentials->getApiKey(),
+            'cache-control' => 'no-cache',
+        ])->get($this->baseUrl . $endpoint, $payload);
+    }
 }
