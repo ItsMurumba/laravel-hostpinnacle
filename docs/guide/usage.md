@@ -33,6 +33,19 @@ $data['msg'] = 'Hello World!';
 $response = $this->hostpinnacle->sendQuickSMS($data);
 ```
 
+**Send quick SMS with link tracking (smartlink):**
+
+`sendQuickSMS`, `sendGroupSMS`, and `sendMobileOnlyFileSMS` accept optional `trackLink` and
+`smartLinkTitle` keys to enable link tracking on any link in the message:
+
+```php
+$data['mobile'] = '254720xxxxxx';
+$data['msg'] = 'Check out https://example.com';
+$data['trackLink'] = 'true';
+$data['smartLinkTitle'] = 'My Example.com Short Link';
+$response = $this->hostpinnacle->sendQuickSMS($data);
+```
+
 **Send quick scheduled SMS:**
 
 ```php

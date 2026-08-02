@@ -28,6 +28,41 @@ test('sends post request with correct payload', function () {
     });
 });
 
+test('sends trackLink and smartLinkTitle when provided', function () {
+    Http::fake([
+        'https://api.hostpinnacle.test/send' => Http::response(['status' => 'success'], 200),
+    ]);
+
+    $hostpinnacle = new Hostpinnacle();
+    $hostpinnacle->sendQuickSMS([
+        'msg' => 'Check out https://example.com',
+        'mobile' => '254700000000',
+        'trackLink' => 'true',
+        'smartLinkTitle' => 'My Example Link',
+    ]);
+
+    Http::assertSent(function ($request) {
+        return $request['trackLink'] === 'true'
+            && $request['smartLinkTitle'] === 'My Example Link';
+    });
+});
+
+test('omits trackLink and smartLinkTitle when not provided', function () {
+    Http::fake([
+        'https://api.hostpinnacle.test/send' => Http::response(['status' => 'success'], 200),
+    ]);
+
+    $hostpinnacle = new Hostpinnacle();
+    $hostpinnacle->sendQuickSMS([
+        'msg' => 'Hello World',
+        'mobile' => '254700000000',
+    ]);
+
+    Http::assertSent(function ($request) {
+        return !isset($request['trackLink']) && !isset($request['smartLinkTitle']);
+    });
+});
+
 test('throws IsNullException when msg is missing', function () {
     $hostpinnacle = new Hostpinnacle();
 

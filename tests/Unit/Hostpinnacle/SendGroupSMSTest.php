@@ -8,7 +8,7 @@ beforeEach(function () {
     hostpinnacle_set_config();
 });
 
-test('sends get request with group ids', function () {
+test('sends post request with group ids', function () {
     Http::fake([
         'https://api.hostpinnacle.test/send*' => Http::response(['status' => 'success'], 200),
     ]);
@@ -21,8 +21,29 @@ test('sends get request with group ids', function () {
 
     expect($response->successful())->toBeTrue();
     Http::assertSent(function ($request) {
-        return str_contains($request->url(), 'https://api.hostpinnacle.test/send')
-            && $request->hasHeader('apikey', 'test-api-key');
+        return $request->method() === 'POST'
+            && str_contains($request->url(), 'https://api.hostpinnacle.test/send')
+            && $request->hasHeader('apikey', 'test-api-key')
+            && $request['group'] === '1,2,3';
+    });
+});
+
+test('sends trackLink and smartLinkTitle when provided', function () {
+    Http::fake([
+        'https://api.hostpinnacle.test/send*' => Http::response(['status' => 'success'], 200),
+    ]);
+
+    $hostpinnacle = new Hostpinnacle();
+    $hostpinnacle->sendGroupSMS([
+        'msg' => 'Check out https://example.com',
+        'groupIds' => '1,2,3',
+        'trackLink' => 'true',
+        'smartLinkTitle' => 'My Example Link',
+    ]);
+
+    Http::assertSent(function ($request) {
+        return $request['trackLink'] === 'true'
+            && $request['smartLinkTitle'] === 'My Example Link';
     });
 });
 

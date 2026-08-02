@@ -53,9 +53,11 @@ class Hostpinnacle
      * @param  string|null  $groupIds
      * @param  mixed  $file
      * @param  string|null  $scheduled
+     * @param  string|null  $trackLink  Enable link tracking (smartlink)
+     * @param  string|null  $smartLinkTitle  Title to identify the tracked link
      * @return array<string, mixed>
      */
-    private function formattedSmsData(string $sendMethod, ?string $message, string $messageType, $contacts = null, $groupIds = null, $file = null, $scheduled = null): array
+    private function formattedSmsData(string $sendMethod, ?string $message, string $messageType, $contacts = null, $groupIds = null, $file = null, $scheduled = null, $trackLink = null, $smartLinkTitle = null): array
     {
         $data = array_filter([
             "userid" => $this->username,
@@ -80,13 +82,22 @@ class Hostpinnacle
             $data["scheduleTime"] = $scheduled;
         }
 
+        if ($trackLink != null) {
+            $data["trackLink"] = $trackLink;
+        }
+
+        if ($smartLinkTitle != null) {
+            $data["smartLinkTitle"] = $smartLinkTitle;
+        }
+
         return $data;
     }
 
     /**
      * Send quick SMS in batches (single or comma-separated mobiles). Country code required for international.
+     * Pass trackLink/smartLinkTitle to enable link tracking (smartlink) on links in the message.
      *
-     * @param  array{msg: string, mobile: string}  $data
+     * @param  array{msg: string, mobile: string, trackLink?: string, smartLinkTitle?: string}  $data
      * @return \Illuminate\Http\Client\Response
      * @throws IsNullException
      */
@@ -96,7 +107,17 @@ class Hostpinnacle
             throw new IsNullException('msg and mobile must not be null');
         }
 
-        $payload = $this->formattedSmsData('quick', $data['msg'], 'text', $data['mobile']);
+        $payload = $this->formattedSmsData(
+            'quick',
+            $data['msg'],
+            'text',
+            $data['mobile'],
+            null,
+            null,
+            null,
+            $data['trackLink'] ?? null,
+            $data['smartLinkTitle'] ?? null
+        );
 
         return Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
@@ -133,8 +154,9 @@ class Hostpinnacle
 
     /**
      * Send SMS to one or more groups (single or comma-separated group IDs). Country code required for international.
+     * Pass trackLink/smartLinkTitle to enable link tracking (smartlink) on links in the message.
      *
-     * @param  array{msg: string, groupIds: string}  $data
+     * @param  array{msg: string, groupIds: string, trackLink?: string, smartLinkTitle?: string}  $data
      * @return \Illuminate\Http\Client\Response
      * @throws IsNullException
      */
@@ -144,12 +166,22 @@ class Hostpinnacle
             throw new IsNullException('msg and groupIds must not be null');
         }
 
-        $payload = $this->formattedSmsData('group', $data['msg'], 'text', null, $data['groupIds']);
+        $payload = $this->formattedSmsData(
+            'group',
+            $data['msg'],
+            'text',
+            null,
+            $data['groupIds'],
+            null,
+            null,
+            $data['trackLink'] ?? null,
+            $data['smartLinkTitle'] ?? null
+        );
 
         return Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
             'cache-control' => 'no-cache'
-        ])->get(
+        ])->post(
             $this->baseUrl . '/send',
             $payload
         );
@@ -173,7 +205,7 @@ class Hostpinnacle
         return Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
             'cache-control' => 'no-cache'
-        ])->get(
+        ])->post(
             $this->baseUrl . '/send',
             $payload
         );
@@ -181,8 +213,9 @@ class Hostpinnacle
 
     /**
      * Send SMS from file with mobile numbers only (first row header: Phone). Country code required e.g. 254720000000.
+     * Pass trackLink/smartLinkTitle to enable link tracking (smartlink) on links in the message.
      *
-     * @param  array{msg: string, file: \Illuminate\Http\UploadedFile|object}  $data
+     * @param  array{msg: string, file: \Illuminate\Http\UploadedFile|object, trackLink?: string, smartLinkTitle?: string}  $data
      * @return \Illuminate\Http\Client\Response
      * @throws IsNullException
      */
@@ -192,7 +225,17 @@ class Hostpinnacle
             throw new IsNullException('msg and file must not be null');
         }
 
-        $payload = $this->formattedSmsData('bulkupload', $data['msg'], 'text');
+        $payload = $this->formattedSmsData(
+            'bulkupload',
+            $data['msg'],
+            'text',
+            null,
+            null,
+            null,
+            null,
+            $data['trackLink'] ?? null,
+            $data['smartLinkTitle'] ?? null
+        );
 
         $extension = $data['file']->getClientOriginalExtension();
 
