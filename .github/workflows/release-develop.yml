@@ -1,7 +1,11 @@
 name: Release Develop (Prerelease)
 
 on:
-  push:
+  workflow_run:
+    workflows:
+      - tests
+    types:
+      - completed
     branches:
       - develop
   workflow_dispatch:
@@ -19,8 +23,26 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  verify_gates:
+    name: Resolve target commit
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      sha: ${{ steps.resolve.outputs.sha }}
+    steps:
+      - name: Resolve target SHA
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+          fi
+
   prepare_tag:
     name: Calculate prerelease tag
+    needs: verify_gates
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -29,6 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ needs.verify_gates.outputs.sha }}
           fetch-depth: 0
 
       - name: Calculate prerelease tag
@@ -85,14 +108,14 @@ jobs:
     name: Publish GitHub prerelease
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: prepare_tag
+    needs: [verify_gates, prepare_tag]
     if: needs.prepare_tag.outputs.should_release == 'true'
     steps:
       - name: Create GitHub prerelease
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.prepare_tag.outputs.tag }}
-          target_commitish: ${{ github.sha }}
+          target_commitish: ${{ needs.verify_gates.outputs.sha }}
           prerelease: true
           generate_release_notes: true
           name: ${{ needs.prepare_tag.outputs.tag }}

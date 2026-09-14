@@ -1,0 +1,49 @@
+name: tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.2'
+            laravel: '12.*'
+            testbench: '10.*'
+          - php: '8.3'
+            laravel: '12.*'
+            testbench: '10.*'
+          - php: '8.3'
+            laravel: '13.*'
+            testbench: '11.*'
+          - php: '8.4'
+            laravel: '13.*'
+            testbench: '11.*'
+
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: pcov
+
+      - name: Require Laravel ${{ matrix.laravel }}
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-update
+          composer require --dev "orchestra/testbench:${{ matrix.testbench }}" --no-update
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --with-all-dependencies
+
+      - name: Run tests with coverage
+        run: composer test:coverage
