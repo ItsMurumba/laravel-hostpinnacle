@@ -13,9 +13,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - php: '8.2'
-            laravel: '12.*'
-            testbench: '10.*'
           - php: '8.3'
             laravel: '12.*'
             testbench: '10.*'
