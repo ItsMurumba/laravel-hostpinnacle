@@ -34,7 +34,7 @@ composer test:coverage
 Or with Pest:
 
 ```bash
-vendor/bin/pest --coverage
+vendor/bin/pest --coverage --coverage-html=build/coverage --coverage-text --coverage-clover=build/coverage/clover.xml
 ```
 
 Coverage is reported in the terminal and written to:
