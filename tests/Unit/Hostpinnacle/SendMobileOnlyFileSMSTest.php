@@ -40,8 +40,8 @@ test('sends trackLink and smartLinkTitle when provided', function () {
     $file->close();
 
     Http::assertSent(function ($request) {
-        return str_contains($request->body(), "name=\"trackLink\"\r\nContent-Length: 4\r\n\r\ntrue\r\n")
-            && str_contains($request->body(), "name=\"smartLinkTitle\"\r\nContent-Length: 15\r\n\r\nMy Example Link\r\n");
+        return str_contains($request->body(), "name=\"trackLink\"\r\n\r\ntrue\r\n")
+            && str_contains($request->body(), "name=\"smartLinkTitle\"\r\n\r\nMy Example Link\r\n");
     });
 });
 
