@@ -1,0 +1,121 @@
+name: Release Develop (Prerelease)
+
+on:
+  workflow_run:
+    workflows:
+      - tests
+    types:
+      - completed
+    branches:
+      - develop
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: "Optional base version override: MAJOR.MINOR.PATCH (e.g. 0.2.0). Produces 0.2.0-rc.N."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-develop
+  cancel-in-progress: false
+
+jobs:
+  verify_gates:
+    name: Resolve target commit
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      sha: ${{ steps.resolve.outputs.sha }}
+    steps:
+      - name: Resolve target SHA
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+          fi
+
+  prepare_tag:
+    name: Calculate prerelease tag
+    needs: verify_gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+      should_release: ${{ steps.tag.outputs.should_release }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.verify_gates.outputs.sha }}
+          fetch-depth: 0
+
+      - name: Calculate prerelease tag
+        id: tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags --force
+
+          RELEASE_VERSION_INPUT="${{ github.event.inputs.release_version }}"
+
+          if [ -n "$RELEASE_VERSION_INPUT" ]; then
+            if ! echo "$RELEASE_VERSION_INPUT" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "release_version must be MAJOR.MINOR.PATCH (e.g. 0.2.0)"
+              exit 1
+            fi
+            major="${RELEASE_VERSION_INPUT%%.*}"
+            rest="${RELEASE_VERSION_INPUT#*.}"
+            minor="${rest%.*}"
+            patch="${rest##*.}"
+          else
+            latest_stable="$(git tag -l 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 || true)"
+            if [ -z "${latest_stable}" ]; then
+              major=0; minor=1; patch=0
+            else
+              version="${latest_stable#v}"
+              IFS='.' read -r major minor patch <<< "$version"
+              patch=$((patch + 1))
+            fi
+          fi
+
+          base="v${major}.${minor}.${patch}"
+          last_rc="$(git tag -l "${base}-rc.*" --sort=-v:refname | head -n1)"
+          if [ -z "${last_rc}" ]; then
+            rc=1
+          else
+            rc="${last_rc##*.}"
+            rc=$((rc + 1))
+          fi
+
+          tag="${base}-rc.${rc}"
+
+          if git rev-parse "$tag" >/dev/null 2>&1; then
+            echo "Tag ${tag} already exists; skipping."
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+            echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "should_release=true" >> "$GITHUB_OUTPUT"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+
+  publish_release:
+    name: Publish GitHub prerelease
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [verify_gates, prepare_tag]
+    if: needs.prepare_tag.outputs.should_release == 'true'
+    steps:
+      - name: Create GitHub prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.prepare_tag.outputs.tag }}
+          target_commitish: ${{ needs.verify_gates.outputs.sha }}
+          prerelease: true
+          generate_release_notes: true
+          name: ${{ needs.prepare_tag.outputs.tag }}

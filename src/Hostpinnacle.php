@@ -2,7 +2,6 @@
 
 namespace Itsmurumba\Hostpinnacle;
 
-use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Config;
 use Itsmurumba\Hostpinnacle\Exceptions\IsNullException;
@@ -15,9 +14,6 @@ class Hostpinnacle
 {
     /** @var string API key from Hostpinnacle Dashboard */
     protected $apiKey;
-
-    /** @var Client Guzzle HTTP client */
-    protected $client;
 
     /** @var mixed Last response from the API */
     protected $response;
@@ -34,6 +30,9 @@ class Hostpinnacle
     /** @var string Password for Hostpinnacle Portal */
     protected $password;
 
+    /** @var \Itsmurumba\Hostpinnacle\HostpinnacleCredentials Resolved credentials, reused by the Api\* accessors */
+    protected $credentials;
+
     /**
      * Create a new Hostpinnacle instance. Uses config when credentials are null.
      *
@@ -49,45 +48,113 @@ class Hostpinnacle
         $this->password = $creds->getPassword();
         $this->baseUrl = $creds->getBaseUrl() ?? Config::get('hostpinnacle.baseUrl');
 
-        $this->setRequestOptions();
-    }
-
-    /**
-     * Configure the Guzzle client with base URI and headers.
-     */
-    private function setRequestOptions(): void
-    {
-        $this->client = new Client(
-            [
-                'base_uri' => $this->baseUrl,
-                'headers' => [
-                    'apikey' => $this->apiKey,
-                    'content-type'  => 'application/x-www-form-urlencoded',
-                    'cache-control' => 'no-cache'
-                ]
-            ]
+        $this->credentials = new HostpinnacleCredentials(
+            $this->apiKey,
+            $this->senderId,
+            $this->username,
+            $this->password,
+            $this->baseUrl
         );
     }
 
     /**
-     * Send an HTTP request and return the response.
+     * Access the Schedule API (list/reschedule/cancel scheduled SMS).
      *
-     * @param  string  $relativeUrl
-     * @param  string  $method
-     * @param  array<string, mixed>  $body
-     * @return \Psr\Http\Message\ResponseInterface
-     * @throws IsNullException
+     * @return \Itsmurumba\Hostpinnacle\Api\ScheduleClient
      */
-    private function setHttpResponse($relativeUrl, $method, $body = [])
+    public function schedule(): Api\ScheduleClient
     {
-        if (is_null($method)) {
-            throw new IsNullException('Method must not be null');
-        }
+        return new Api\ScheduleClient($this->credentials);
+    }
 
-        return $this->client->{strtolower($method)}(
-            $this->baseUrl . $relativeUrl,
-            ["body" => json_encode($body)]
-        );
+    /**
+     * Access the Sender ID API (create/read/update/delete approved sender names).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\SenderIdClient
+     */
+    public function senderId(): Api\SenderIdClient
+    {
+        return new Api\SenderIdClient($this->credentials);
+    }
+
+    /**
+     * Access the Message Template API (create/read/update/delete reusable message bodies).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\MessageTemplateClient
+     */
+    public function messageTemplate(): Api\MessageTemplateClient
+    {
+        return new Api\MessageTemplateClient($this->credentials);
+    }
+
+    /**
+     * Access the Draft API (create/read/update/delete saved title/content drafts).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\DraftClient
+     */
+    public function draft(): Api\DraftClient
+    {
+        return new Api\DraftClient($this->credentials);
+    }
+
+    /**
+     * Access the Webhook API (create/read/update/delete the DLR webhook endpoint).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\WebhookClient
+     */
+    public function webhook(): Api\WebhookClient
+    {
+        return new Api\WebhookClient($this->credentials);
+    }
+
+    /**
+     * Access the Account Profile API (status/profile/credit history of the remote Hostpinnacle account).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\AccountProfileClient
+     */
+    public function accountProfile(): Api\AccountProfileClient
+    {
+        return new Api\AccountProfileClient($this->credentials);
+    }
+
+    /**
+     * Access the Password API (change the Hostpinnacle portal password).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\PasswordClient
+     */
+    public function password(): Api\PasswordClient
+    {
+        return new Api\PasswordClient($this->credentials);
+    }
+
+    /**
+     * Access the API Key API (create/read/update/delete the API key).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\ApiKeyClient
+     */
+    public function apiKeys(): Api\ApiKeyClient
+    {
+        return new Api\ApiKeyClient($this->credentials);
+    }
+
+    /**
+     * Access the Contact Group API (create/read/update/delete named contact groups).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\ContactGroupClient
+     */
+    public function contactGroups(): Api\ContactGroupClient
+    {
+        return new Api\ContactGroupClient($this->credentials);
+    }
+
+    /**
+     * Access the Contact API (create/upload/read/update/delete contacts).
+     *
+     * @return \Itsmurumba\Hostpinnacle\Api\ContactClient
+     */
+    public function contacts(): Api\ContactClient
+    {
+        return new Api\ContactClient($this->credentials);
     }
 
     /**
@@ -97,9 +164,11 @@ class Hostpinnacle
      * @param  string|null  $groupIds
      * @param  mixed  $file
      * @param  string|null  $scheduled
+     * @param  string|null  $trackLink  Enable link tracking (smartlink)
+     * @param  string|null  $smartLinkTitle  Title to identify the tracked link
      * @return array<string, mixed>
      */
-    private function formattedSmsData(string $sendMethod, ?string $message, string $messageType, $contacts = null, $groupIds = null, $file = null, $scheduled = null): array
+    private function formattedSmsData(string $sendMethod, ?string $message, string $messageType, $contacts = null, $groupIds = null, $file = null, $scheduled = null, $trackLink = null, $smartLinkTitle = null): array
     {
         $data = array_filter([
             "userid" => $this->username,
@@ -124,13 +193,22 @@ class Hostpinnacle
             $data["scheduleTime"] = $scheduled;
         }
 
+        if ($trackLink != null) {
+            $data["trackLink"] = $trackLink;
+        }
+
+        if ($smartLinkTitle != null) {
+            $data["smartLinkTitle"] = $smartLinkTitle;
+        }
+
         return $data;
     }
 
     /**
      * Send quick SMS in batches (single or comma-separated mobiles). Country code required for international.
+     * Pass trackLink/smartLinkTitle to enable link tracking (smartlink) on links in the message.
      *
-     * @param  array{msg: string, mobile: string}  $data
+     * @param  array{msg: string, mobile: string, trackLink?: string, smartLinkTitle?: string}  $data
      * @return \Illuminate\Http\Client\Response
      * @throws IsNullException
      */
@@ -140,7 +218,17 @@ class Hostpinnacle
             throw new IsNullException('msg and mobile must not be null');
         }
 
-        $payload = $this->formattedSmsData('quick', $data['msg'], 'text', $data['mobile']);
+        $payload = $this->formattedSmsData(
+            'quick',
+            $data['msg'],
+            'text',
+            $data['mobile'],
+            null,
+            null,
+            null,
+            $data['trackLink'] ?? null,
+            $data['smartLinkTitle'] ?? null
+        );
 
         return Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
@@ -177,8 +265,9 @@ class Hostpinnacle
 
     /**
      * Send SMS to one or more groups (single or comma-separated group IDs). Country code required for international.
+     * Pass trackLink/smartLinkTitle to enable link tracking (smartlink) on links in the message.
      *
-     * @param  array{msg: string, groupIds: string}  $data
+     * @param  array{msg: string, groupIds: string, trackLink?: string, smartLinkTitle?: string}  $data
      * @return \Illuminate\Http\Client\Response
      * @throws IsNullException
      */
@@ -188,12 +277,22 @@ class Hostpinnacle
             throw new IsNullException('msg and groupIds must not be null');
         }
 
-        $payload = $this->formattedSmsData('group', $data['msg'], 'text', null, $data['groupIds']);
+        $payload = $this->formattedSmsData(
+            'group',
+            $data['msg'],
+            'text',
+            null,
+            $data['groupIds'],
+            null,
+            null,
+            $data['trackLink'] ?? null,
+            $data['smartLinkTitle'] ?? null
+        );
 
         return Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
             'cache-control' => 'no-cache'
-        ])->get(
+        ])->post(
             $this->baseUrl . '/send',
             $payload
         );
@@ -217,7 +316,7 @@ class Hostpinnacle
         return Http::asForm()->withHeaders([
             'apikey' => $this->apiKey,
             'cache-control' => 'no-cache'
-        ])->get(
+        ])->post(
             $this->baseUrl . '/send',
             $payload
         );
@@ -225,8 +324,9 @@ class Hostpinnacle
 
     /**
      * Send SMS from file with mobile numbers only (first row header: Phone). Country code required e.g. 254720000000.
+     * Pass trackLink/smartLinkTitle to enable link tracking (smartlink) on links in the message.
      *
-     * @param  array{msg: string, file: \Illuminate\Http\UploadedFile|object}  $data
+     * @param  array{msg: string, file: \Illuminate\Http\UploadedFile|object, trackLink?: string, smartLinkTitle?: string}  $data
      * @return \Illuminate\Http\Client\Response
      * @throws IsNullException
      */
@@ -236,7 +336,17 @@ class Hostpinnacle
             throw new IsNullException('msg and file must not be null');
         }
 
-        $payload = $this->formattedSmsData('bulkupload', $data['msg'], 'text');
+        $payload = $this->formattedSmsData(
+            'bulkupload',
+            $data['msg'],
+            'text',
+            null,
+            null,
+            null,
+            null,
+            $data['trackLink'] ?? null,
+            $data['smartLinkTitle'] ?? null
+        );
 
         $extension = $data['file']->getClientOriginalExtension();
 

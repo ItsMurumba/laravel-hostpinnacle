@@ -8,7 +8,7 @@ beforeEach(function () {
     hostpinnacle_set_config();
 });
 
-test('sends get request with scheduleTime', function () {
+test('sends post request with scheduleTime', function () {
     Http::fake([
         'https://api.hostpinnacle.test/send*' => Http::response(['status' => 'success'], 200),
     ]);
@@ -21,6 +21,10 @@ test('sends get request with scheduleTime', function () {
     ]);
 
     expect($response->successful())->toBeTrue();
+    Http::assertSent(function ($request) {
+        return $request->method() === 'POST'
+            && $request['scheduleTime'] === '2025-02-02 12:00:00';
+    });
 });
 
 test('throws IsNullException when required params missing', function () {

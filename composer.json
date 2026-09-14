@@ -28,17 +28,16 @@
     ],
     "require": {
         "php": "^7.1|^8.0|^8.1|^8.2|^8.3",
-        "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
-        "guzzlehttp/guzzle": "^6.0|^7.0"
+        "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
     },
     "require-dev": {
-        "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0"
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0"
     },
     "scripts": {
         "test": "vendor/bin/pest",
-        "test:coverage": "mkdir -p build/coverage && vendor/bin/pest --coverage",
+        "test:coverage": "mkdir -p build/coverage && vendor/bin/pest --coverage --coverage-html=build/coverage --coverage-text --coverage-clover=build/coverage/clover.xml",
         "post-autoload-dump": [
             "@clear",
             "@prepare"

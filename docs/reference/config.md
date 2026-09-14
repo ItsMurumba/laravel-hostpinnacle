@@ -22,11 +22,9 @@
 |-----|-----|---------|-------------|
 | `enabled` | `HOSTPINNACLE_SAAS_ENABLED` | `false` | Turn on multi-account (migrations, routes, `Hostpinnacle::for()`) |
 | `table` | — | `hostpinnacle_accounts` | Table name for stored accounts (set before migrating; do not change after) |
-| `owner_type` | `HOSTPINNACLE_SAAS_OWNER_TYPE` | `user` | Owner type (e.g. user, tenant) |
 | `owner_key` | `HOSTPINNACLE_SAAS_OWNER_KEY` | `user_id` | Owner foreign key column name (set before migrating; do not change after) |
 | `owner_key_type` | `HOSTPINNACLE_SAAS_OWNER_KEY_TYPE` | `unsignedBigInteger` | Owner column type: `unsignedBigInteger`, `uuid`, or `string` (set before migrating; use `uuid` or `string` when owner model has UUID/string PK) |
 | `owner_model` | `HOSTPINNACLE_SAAS_OWNER_MODEL` | `App\Models\User` | Eloquent model for owner relation |
-| `encrypt_password` | `HOSTPINNACLE_SAAS_ENCRYPT_PASSWORD` | `true` | Encrypt password in DB |
 | `api_routes_enabled` | `HOSTPINNACLE_SAAS_API_ROUTES_ENABLED` | `true` | Register API CRUD routes when SaaS enabled |
 | `web_routes_enabled` | `HOSTPINNACLE_SAAS_WEB_ROUTES_ENABLED` | `true` | Register Web CRUD routes when SaaS enabled |
 | `api_prefix` | `HOSTPINNACLE_SAAS_API_PREFIX` | `api` | API route prefix |

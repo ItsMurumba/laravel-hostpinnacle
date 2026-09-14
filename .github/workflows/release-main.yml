@@ -1,0 +1,105 @@
+name: Release Main
+
+on:
+  workflow_run:
+    workflows:
+      - tests
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: "Optional version override: MAJOR.MINOR.PATCH (e.g. 1.0.0). Defaults to bumping the patch of the latest stable tag."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  verify_gates:
+    name: Resolve target commit
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      sha: ${{ steps.resolve.outputs.sha }}
+    steps:
+      - name: Resolve target SHA
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+          fi
+
+  prepare_tag:
+    name: Calculate stable tag
+    needs: verify_gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+      should_release: ${{ steps.tag.outputs.should_release }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.verify_gates.outputs.sha }}
+          fetch-depth: 0
+
+      - name: Calculate stable tag
+        id: tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags --force
+
+          RELEASE_VERSION_INPUT="${{ github.event.inputs.release_version }}"
+          prev_tag="$(git tag -l 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 || true)"
+
+          if [ -n "$RELEASE_VERSION_INPUT" ]; then
+            if ! echo "$RELEASE_VERSION_INPUT" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "release_version must be MAJOR.MINOR.PATCH (e.g. 1.0.0)"
+              exit 1
+            fi
+            tag="v${RELEASE_VERSION_INPUT}"
+          elif [ -z "${prev_tag}" ]; then
+            tag="v0.1.0"
+          else
+            version="${prev_tag#v}"
+            IFS='.' read -r major minor patch <<< "$version"
+            tag="v${major}.${minor}.$((patch + 1))"
+          fi
+
+          if git rev-parse "$tag" >/dev/null 2>&1; then
+            echo "Tag ${tag} already exists; skipping."
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+            echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "should_release=true" >> "$GITHUB_OUTPUT"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+
+  publish_release:
+    name: Publish GitHub release
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [verify_gates, prepare_tag]
+    if: needs.prepare_tag.outputs.should_release == 'true'
+    steps:
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.prepare_tag.outputs.tag }}
+          target_commitish: ${{ needs.verify_gates.outputs.sha }}
+          prerelease: false
+          generate_release_notes: true
+          name: ${{ needs.prepare_tag.outputs.tag }}
