@@ -39,9 +39,12 @@ test('sends trackLink and smartLinkTitle when provided', function () {
     ]);
     $file->close();
 
+    // Matches the field's Content-Disposition line through to its value, tolerating an
+    // optional Content-Length header line in between — Guzzle's multipart encoder emits
+    // one on some versions and not others, but that's an encoder detail, not our concern.
     Http::assertSent(function ($request) {
-        return str_contains($request->body(), "name=\"trackLink\"\r\n\r\ntrue\r\n")
-            && str_contains($request->body(), "name=\"smartLinkTitle\"\r\n\r\nMy Example Link\r\n");
+        return preg_match('/name="trackLink"\r\n(?:[^\r\n]+\r\n)*\r\ntrue\r\n/', $request->body()) === 1
+            && preg_match('/name="smartLinkTitle"\r\n(?:[^\r\n]+\r\n)*\r\nMy Example Link\r\n/', $request->body()) === 1;
     });
 });
 
